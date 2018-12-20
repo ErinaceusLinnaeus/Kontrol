@@ -23,19 +23,14 @@ void AutoRocketScript::saveScript() {
 
 void AutoRocketNode::newNode() {
 
-  uint32_t command;
-  char message[127];
+    todos action;
+    uint32_t value;
   
-  editCommand(command);
-  editCommand(*message);
+  editNode(action, value);
 }
 
-void AutoRocketNode::editCommand(uint32_t a) {
+void AutoRocketNode::editNode(todos a, uint32_t v) {
 
-  command = a;
-}
-
-void AutoRocketNode::editMessage(char a[127]) {
-
-  strcpy(message, a);
+  action = a;
+  value = v;
 }

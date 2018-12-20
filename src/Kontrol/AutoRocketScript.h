@@ -9,56 +9,65 @@
 
 #include <stdint.h>
 
+/*
+ * Types of things a node can do:
+ * Wait some time.
+ * Wait until a distance to a target is reached.
+ * Wait until a given radar altitude.
+ * Wait until a given altitude in meter.
+ * Wait until a given altitude in kilometer.
+ * Change the throttle.
+ * Stage.
+ * Toggle an action group.
+ * Change the attitude.
+ * Change the translation.
+ * Exit, being the last node.
+ */
+enum todos {waitSeconds, waitForDistanceCM, waitForRAltM, waitForAltM, waitForAltKM, setThrottle, setStage, toggleACG, setAttitude, setTranslation, Exit};
+
 /*A class to program for autofly mode
  * First a name you can enter
  * And a description you can enter
  * Let the rocket do something or exit:
- *  Command is either... (max. 268.435.456) *  
- *    ...the time to wait[seconds] - max. 4.473.924 min 16 s
- *                                   186.413 h 30 min 39 s
- *                                   7.767 d 5 h 30 min 39 s
- *                                   ~ 28 y
- *      0001 xxxx xxxxxxxx xxxxxxxx xxxxxxxx
+ *  Value is either... (max. 4.294.967.295)
+ *    ...the time to wait[seconds]
+ *      xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
  *    ...the distance (to a target) [centimeter]
- *      0010 xxxx xxxxxxxx xxxxxxxx xxxxxxxx
+ *      xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
  *    ...the (radar)altitude [meter]
- *      0011 xxxx xxxxxxxx xxxxxxxx xxxxxxxx
+ *      xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
  *    ...the altitude [meter]
- *      0100 xxxx xxxxxxxx xxxxxxxx xxxxxxxx
- *    ...the altitude [kilometer] - ca. 1,8 au
- *      0101 xxxx xxxxxxxx xxxxxxxx xxxxxxxx
+ *      xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+ *    ...the altitude [kilometer]
+ *      xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
  *    ...throttle [%]
- *      0110 0000 00000000 00000000 0xxxxxxx
+ *      00000000 00000000 00000000 0xxxxxxx
  *    stage
- *      0111 1111 11111111 11111111 11111111
+ *      11111111 11111111 11111111 11111111
  *    actiongroup, also SAS, RCS, Brakes, Gear, etc.
- *      1000 0000 00000000 00000000 0xxxxxxx - AG off
- *      1001 0000 00000000 00000000 1xxxxxxx - AG on
+ *      00000000 00000000 00000000 0xxxxxxx
  *    attitude
- *      1010 0000 xxxxxxxx yyyyyyyy zzzzzzzz
+ *      00000xxx xxxxxxyy yyyyyyyz zzzzzzzz                    ->  360° (z) + 360°*512 (y) + 360°*262.144 (x)
  *      x, y, z in planetary reference frame
- *    translate
- *      1011 0000 xxxxxxxx yyyyyyyy zzzzzzzz
- *      x: roll
- *      y: pitch
- *      z: yaw
+ *    translation
+ *      00000xxx xxxxxxyy yyyyyyyz zzzzzzzz                    ->  360° (z) + 360°*512 (y) + 360°*262.144 (x)
+ *      x, y, z in planetary reference frame
  *    exit (exit point at last node)
- *      1111 0000 00000000 00000000 00000000
+ *      00000000 00000000 00000000 00000000
  */
 class AutoRocketNode {
   private:
-    uint32_t command;
-    char message[127];
+    todos action;
+    uint32_t value;
     AutoRocketNode *prevNode;
     AutoRocketNode *nextNode;
 
   public:
     void newNode();
-    void editCommand(uint32_t command);
-    void editMessage(char message[127]);
-    void unloadNode();
-    uint32_t getCommand();
-    char getMessage();
+    void editNode(todos a, uint32_t v);
+    void deleteNode();
+    uint32_t getAction();
+    uint32_t getValue();
     AutoRocketNode getPrevNode();
     AutoRocketNode getNextNode();
 };
@@ -76,7 +85,6 @@ class AutoRocketScript {
     void loadScript(char filename[15]);
     void editFilename(char filename[15]);
     void editDescription(char description[255]);
-    void unloadScript();
     void deleteScript();
     char getFilename();
     char getDescription();
