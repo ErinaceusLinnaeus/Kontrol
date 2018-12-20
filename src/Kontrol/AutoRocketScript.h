@@ -54,7 +54,7 @@
  *      00000000 00000000 00000000 00000000
  */
  
-enum todos {waitSeconds, waitForDistanceCM, waitForRAltM, waitForAltM, waitForAltKM, setThrottle, setStage, toggleACG, setAttitude, setTranslation, Exit};
+enum todos {waitSeconds, waitForDistanceCM, waitForRAltM, waitForAltM, waitForAltKM, setThrottle, setStage, toggleACG, setAttitude, setTranslation, theExitNode};
 
 class AutoRocketNode {
   private:
