@@ -23,8 +23,6 @@
  * Change the translation.
  * Exit, being the last node.
  */
-enum todos {waitSeconds, waitForDistanceCM, waitForRAltM, waitForAltM, waitForAltKM, setThrottle, setStage, toggleACG, setAttitude, setTranslation, Exit};
-
 /*A class to program for autofly mode
  * First a name you can enter
  * And a description you can enter
@@ -55,17 +53,25 @@ enum todos {waitSeconds, waitForDistanceCM, waitForRAltM, waitForAltM, waitForAl
  *    exit (exit point at last node)
  *      00000000 00000000 00000000 00000000
  */
+ 
+enum todos {waitSeconds, waitForDistanceCM, waitForRAltM, waitForAltM, waitForAltKM, setThrottle, setStage, toggleACG, setAttitude, setTranslation, Exit};
+
 class AutoRocketNode {
   private:
     todos action;
     uint32_t value;
+
+  public:
     AutoRocketNode *prevNode;
     AutoRocketNode *nextNode;
 
-  public:
-    void newNode();
-    void editNode(todos a, uint32_t v);
-    void deleteNode();
+    //Constructors
+    AutoRocketNode();
+    AutoRocketNode(todos action, uint32_t value);
+
+    AutoRocketNode newNode(AutoRocketNode *currNode);
+    AutoRocketNode delNode(AutoRocketNode *currNode);
+
     uint32_t getAction();
     uint32_t getValue();
     AutoRocketNode getPrevNode();
@@ -81,14 +87,13 @@ class AutoRocketScript {
     void saveScript();
 
   public:
-    void newScript(char filename[15], char description[255]);
-    void loadScript(char filename[15]);
+    AutoRocketNode *currNode;
+    
+    //Constructor
+    AutoRocketScript();
+
     void editFilename(char filename[15]);
     void editDescription(char description[255]);
-    void deleteScript();
-    char getFilename();
-    char getDescription();
-    AutoRocketNode getFirstNode();
 };
 
 #endif
