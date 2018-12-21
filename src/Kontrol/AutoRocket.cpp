@@ -116,10 +116,12 @@ char AutoRocketScript::getDescription(){
 void AutoRocketScript::setFilename(char filename[15]) {
   
   strcpy(filename, filename);
+  saveScript();
 }
 
 
 void AutoRocketScript::setDescription(char description[255]) {
   
   strcpy(description, description);
+  saveScript();
 }

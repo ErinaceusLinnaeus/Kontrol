@@ -28,7 +28,7 @@
  * And a description you can enter
  * Let the rocket do something or exit:
  *  Value is either... (max. 4.294.967.295)
- *    ...the time to wait[tenth-of-a-seconds]
+ *    ...the time to wait[tenth-of-a-seconds] - 4971 d - 06:28:15 ~> 13 years 6 months
  *      xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
  *    ...the distance (to a target) [centimeter]
  *      xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
@@ -57,15 +57,14 @@
 enum todos {waitTenthSeconds, waitForDistanceCM, waitForRAltM, waitForAltM, waitForAltKM, setThrottle, setStage, toggleACG, setAttitude, setTranslation, theExitNode};
 
 class AutoRocketNode {
-  private:
   
+  private:
     todos action;
     uint32_t value;
     AutoRocketNode* prevNode;
     AutoRocketNode* nextNode;
 
   public:
-
     //Constructors
     AutoRocketNode();
     AutoRocketNode(todos action, uint32_t value);
@@ -88,18 +87,16 @@ class AutoRocketNode {
 class AutoRocketScript {
 
   private:
-  
     char filename[15], description[255];
     AutoRocketNode* firstNode;
     AutoRocketNode* lastNode;
     AutoRocketNode* currNode;
-    
-    void saveScript();
 
   public:
-    
     //Constructor
     AutoRocketScript();
+    
+    void saveScript();
 
     //Getting Data
     AutoRocketNode getCurrentNode();
@@ -109,7 +106,6 @@ class AutoRocketScript {
     //Manipulating Data
     void setFilename(char filename[15]);
     void setDescription(char description[255]);
-    
 };
 
 #endif
