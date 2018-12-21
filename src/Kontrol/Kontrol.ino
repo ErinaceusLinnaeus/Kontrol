@@ -8,7 +8,7 @@
 
 //#include <SPI.h>
 #include <KeyboardController.h>
-#include "AutoRocketScript.h"
+#include "AutoRocket.h"
 //Display
 #include <TFT_HX8357_Due.h>
 //Part of the All_Free_Fonts_Demo of the TFT library

@@ -1,19 +1,19 @@
 /*  (C)2018 Benjamin Schmid
  *   
- *  AutoRocketScript.h
+ *  AutoRocket.h
  *  Definition of classes to create a doubly linked list to perform auto piloting
  */
 
-#ifndef AUTOROCKETSCRIPT_H
-#define AUTOROCKETSCRIPT_H
+#ifndef AUTOROCKET_H
+#define AUTOROCKET_H
 
 #include <stdint.h>
 
 /*
  * Types of things a node can do:
  * Wait some time.
- * Wait until a distance to a target is reached.
- * Wait until a given radar altitude.
+ * Wait until a distance to a target in centimeter is reached.
+ * Wait until a given radar altitude in meter.
  * Wait until a given altitude in meter.
  * Wait until a given altitude in kilometer.
  * Change the throttle.
@@ -28,7 +28,7 @@
  * And a description you can enter
  * Let the rocket do something or exit:
  *  Value is either... (max. 4.294.967.295)
- *    ...the time to wait[seconds]
+ *    ...the time to wait[tenth-of-a-seconds]
  *      xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
  *    ...the distance (to a target) [centimeter]
  *      xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
@@ -54,46 +54,62 @@
  *      00000000 00000000 00000000 00000000
  */
  
-enum todos {waitSeconds, waitForDistanceCM, waitForRAltM, waitForAltM, waitForAltKM, setThrottle, setStage, toggleACG, setAttitude, setTranslation, theExitNode};
+enum todos {waitTenthSeconds, waitForDistanceCM, waitForRAltM, waitForAltM, waitForAltKM, setThrottle, setStage, toggleACG, setAttitude, setTranslation, theExitNode};
 
 class AutoRocketNode {
   private:
+  
     todos action;
     uint32_t value;
+    AutoRocketNode* prevNode;
+    AutoRocketNode* nextNode;
 
   public:
-    AutoRocketNode *prevNode;
-    AutoRocketNode *nextNode;
 
     //Constructors
     AutoRocketNode();
     AutoRocketNode(todos action, uint32_t value);
 
+    //Manage Nodes
     AutoRocketNode newNode(AutoRocketNode *currNode);
-    AutoRocketNode delNode(AutoRocketNode *currNode);
+    void delNode(AutoRocketNode *currNode);
 
+    //Getting Data
     uint32_t getAction();
     uint32_t getValue();
     AutoRocketNode getPrevNode();
     AutoRocketNode getNextNode();
+
+    //Manipulating Data
+    void setPrevNode(AutoRocketNode* currNode, AutoRocketNode* prevNode);
+    void setNextNode(AutoRocketNode* currNode, AutoRocketNode* nextNode);
 };
 
 class AutoRocketScript {
 
   private:
+  
     char filename[15], description[255];
-    AutoRocketNode *firstNode;
-    AutoRocketNode *lastNode;
+    AutoRocketNode* firstNode;
+    AutoRocketNode* lastNode;
+    AutoRocketNode* currNode;
+    
     void saveScript();
 
   public:
-    AutoRocketNode *currNode;
     
     //Constructor
     AutoRocketScript();
 
-    void editFilename(char filename[15]);
-    void editDescription(char description[255]);
+    //Getting Data
+    AutoRocketNode getCurrentNode();
+    char getFilename();
+    char getDescription();
+    
+    //Manipulating Data
+    void setFilename(char filename[15]);
+    void setDescription(char description[255]);
+    
 };
 
 #endif
