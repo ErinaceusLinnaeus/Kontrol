@@ -6,6 +6,7 @@
 # Datatypes (KEYWORD1)
 ############################################
 
+AutoRocket	KEYWORD1
 AutoRocketScript	KEYWORD1
 AutoRocketNode	KEYWORD1
 
@@ -25,7 +26,7 @@ editDescription	KEYWORD2
 # Constants (LITERAL1)
 ############################################
 
-waitSeconds	LITERAL1
+waitTenthSeconds	LITERAL1
 waitForDistanceCM	LITERAL1
 waitForRAltM	LITERAL1
 waitForAltM	LITERAL1
