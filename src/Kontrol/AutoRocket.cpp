@@ -55,14 +55,14 @@ AutoRocketNode::AutoRocketNode(todos action, uint32_t value) {
   this->value = value;
 }
 
-AutoRocketNode AutoRocketNode::newNode(AutoRocketNode *node) {
+AutoRocketNode AutoRocketNode::newNode(AutoRocketNode *currNode) {
 
   AutoRocketNode* temp;
   temp = new AutoRocketNode();
   
-  temp->prevNode = node;
-  temp->nextNode = node->nextNode;
-  node->nextNode = temp;
+  temp->prevNode = currNode;
+  temp->nextNode = currNode->nextNode;
+  currNode->nextNode = temp;
   temp->nextNode->prevNode = temp;
 
   return *temp;
