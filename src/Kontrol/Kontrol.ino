@@ -63,6 +63,11 @@ void fillKeyboardBuffer() {
 void setup() {
 
   Serial.begin(115200);
+
+  //Create the AutoRocketList. For now only one wil ever be used.
+  //Loading or starting a new one will unload the current Script.
+  //Acronym for AutoRocketList; isn't it cute?
+  AutoRocketList auroli;
   
   //Setup the LCD
   tft.begin();

@@ -84,7 +84,7 @@ class AutoRocketNode {
     void setNextNode(AutoRocketNode* currNode, AutoRocketNode* nextNode);
 };
 
-class AutoRocketScript {
+class AutoRocketList {
 
   private:
     char filename[15], description[255];
@@ -94,7 +94,7 @@ class AutoRocketScript {
 
   public:
     //Constructor
-    AutoRocketScript();
+    AutoRocketList();
     
     void saveScript();
 

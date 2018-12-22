@@ -6,7 +6,7 @@
 #include "AutoRocket.h"
 #include <string.h>
 
-AutoRocketScript::AutoRocketScript() {
+AutoRocketList::AutoRocketList() {
 
   this->setFilename("newScript");
   this->setDescription("Describe me...");
@@ -34,7 +34,7 @@ AutoRocketScript::AutoRocketScript() {
 }
 
 //Save to SD Card
-void AutoRocketScript::saveScript() {
+void AutoRocketList::saveScript() {
 
   NULL;
 }
@@ -98,29 +98,29 @@ void AutoRocketNode::setNextNode(AutoRocketNode* currNode, AutoRocketNode* nextN
 
 
 
-AutoRocketNode AutoRocketScript::getCurrentNode(){
+AutoRocketNode AutoRocketList::getCurrentNode(){
 
   return *currNode;
 }
 
-char AutoRocketScript::getFilename(){
+char AutoRocketList::getFilename(){
 
   return filename[15];
 }
 
-char AutoRocketScript::getDescription(){
+char AutoRocketList::getDescription(){
   
   return description[255];
 }
 
-void AutoRocketScript::setFilename(char filename[15]) {
+void AutoRocketList::setFilename(char filename[15]) {
   
   strcpy(filename, filename);
   saveScript();
 }
 
 
-void AutoRocketScript::setDescription(char description[255]) {
+void AutoRocketList::setDescription(char description[255]) {
   
   strcpy(description, description);
   saveScript();
