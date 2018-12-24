@@ -61,10 +61,12 @@ class AutoRocketNode {
   private:
     todos action;
     uint32_t value;
-    AutoRocketNode* prevNode;
-    AutoRocketNode* nextNode;
 
   public:
+    //The Nodes
+    AutoRocketNode* prevNode;
+    AutoRocketNode* nextNode;
+    
     //Constructors
     AutoRocketNode();
     AutoRocketNode(todos action, uint32_t value);
@@ -74,34 +76,31 @@ class AutoRocketNode {
     void delNode(AutoRocketNode *currNode);
 
     //Getting Data
-    uint32_t getAction();
+    todos getAction();
     uint32_t getValue();
-    AutoRocketNode getPrevNode();
-    AutoRocketNode getNextNode();
 
     //Manipulating Data
-    void setPrevNode(AutoRocketNode* currNode, AutoRocketNode* prevNode);
-    void setNextNode(AutoRocketNode* currNode, AutoRocketNode* nextNode);
 };
 
 class AutoRocketList {
 
   private:
     char filename[15], description[255];
+
+  public:
+    //The Nodes
     AutoRocketNode* firstNode;
     AutoRocketNode* lastNode;
     AutoRocketNode* currNode;
-
-  public:
+    
     //Constructor
     AutoRocketList();
     
     void saveScript();
 
     //Getting Data
-    AutoRocketNode getCurrentNode();
-    char getFilename();
-    char getDescription();
+    char* getFilename();
+    char* getDescription();
     
     //Manipulating Data
     void setFilename(char filename[15]);

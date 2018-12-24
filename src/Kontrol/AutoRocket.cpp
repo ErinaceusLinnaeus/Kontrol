@@ -14,23 +14,15 @@ AutoRocketList::AutoRocketList() {
   this->firstNode = new AutoRocketNode();
   this->lastNode = new AutoRocketNode(theExitNode, 0);
   
-//This needed the nodes to be public
-//  this->firstNode->prevNode = NULL;
-//  this->firstNode->nextNode = this->lastNode;
-//This is with private nodes
-  this->firstNode->setPrevNode(this->firstNode, NULL);
-  this->firstNode->setNextNode(this->firstNode, this->lastNode);
+  this->firstNode->prevNode = NULL;
+  this->firstNode->nextNode = this->lastNode;
   
-//This needed the nodes to be public
-//  this->lastNode->prevNode = this->firstNode;
-//  this->lastNode->nextNode = NULL;
-//This is with private nodes
-  this->lastNode->setPrevNode(this->lastNode, this->firstNode);
-  this->lastNode->setNextNode(this->lastNode, NULL);
+  this->lastNode->prevNode = this->firstNode;
+  this->lastNode->nextNode = NULL;
 
   this->currNode = firstNode;
 
-  saveScript();
+//  saveScript();
 }
 
 //Save to SD Card
@@ -76,7 +68,7 @@ void AutoRocketNode::delNode(AutoRocketNode *node) {
   delete node;
 }
 
-uint32_t AutoRocketNode::getAction() {
+todos AutoRocketNode::getAction() {
   
   return this->action;
 }
@@ -86,42 +78,25 @@ uint32_t AutoRocketNode::getValue() {
   return this->value;
 }
 
-void AutoRocketNode::setPrevNode(AutoRocketNode* currNode, AutoRocketNode* prevNode){
+char* AutoRocketList::getFilename(){
 
-  currNode->prevNode = prevNode;
+  return this->filename;
 }
 
-void AutoRocketNode::setNextNode(AutoRocketNode* currNode, AutoRocketNode* nextNode){
+char* AutoRocketList::getDescription(){
   
-  currNode->nextNode = nextNode;
-}
-
-
-
-AutoRocketNode AutoRocketList::getCurrentNode(){
-
-  return *currNode;
-}
-
-char AutoRocketList::getFilename(){
-
-  return filename[15];
-}
-
-char AutoRocketList::getDescription(){
-  
-  return description[255];
+  return this->description;
 }
 
 void AutoRocketList::setFilename(char filename[15]) {
   
-  strcpy(filename, filename);
-  saveScript();
+  strcpy(this->filename, filename);
+//  saveScript();
 }
 
 
 void AutoRocketList::setDescription(char description[255]) {
   
-  strcpy(description, description);
-  saveScript();
+  strcpy(this->description, description);
+//  saveScript();
 }
