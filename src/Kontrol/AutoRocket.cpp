@@ -6,6 +6,37 @@
 #include "AutoRocket.h"
 #include <string.h>
 
+char* getTodosString(todos action){
+  
+  switch(action){
+      case 0:
+        return"waitTenthSeconds";
+      case 1:
+       return "waitForDistanceCM";
+      case 2:
+       return "waitForRAltM";
+      case 3:
+       return "waitForAltM";
+      case 4:
+       return "waitForAltKM";
+      case 5:
+       return "setThrottle";
+      case 6:
+       return "setStage";
+      case 7:
+       return "toggleACG";
+      case 8:
+       return "setAttitude";
+      case 9:
+       return "setTranslation";
+      case 10:
+       return "theExitNode";
+      default:
+       return "outOfRange";
+    }
+}
+
+
 AutoRocketList::AutoRocketList() {
 
   this->setFilename("newScript");
@@ -47,17 +78,18 @@ AutoRocketNode::AutoRocketNode(todos action, uint32_t value) {
   this->value = value;
 }
 
-AutoRocketNode AutoRocketNode::newNode(AutoRocketNode *currNode) {
+void AutoRocketNode::newNode(AutoRocketNode *currNode, todos action, uint32_t value) {
 
   AutoRocketNode* temp;
   temp = new AutoRocketNode();
+  
+  temp->action = action;
+  temp->value = value;
   
   temp->prevNode = currNode;
   temp->nextNode = currNode->nextNode;
   currNode->nextNode = temp;
   temp->nextNode->prevNode = temp;
-
-  return *temp;
 }
 
 void AutoRocketNode::delNode(AutoRocketNode *node) {

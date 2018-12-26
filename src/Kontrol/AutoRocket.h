@@ -56,6 +56,8 @@
  
 enum todos {waitTenthSeconds, waitForDistanceCM, waitForRAltM, waitForAltM, waitForAltKM, setThrottle, setStage, toggleACG, setAttitude, setTranslation, theExitNode};
 
+char* getTodosString(todos action);
+
 class AutoRocketNode {
   
   private:
@@ -72,7 +74,7 @@ class AutoRocketNode {
     AutoRocketNode(todos action, uint32_t value);
 
     //Manage Nodes
-    AutoRocketNode newNode(AutoRocketNode *currNode);
+    void newNode(AutoRocketNode *currNode, todos action, uint32_t value);
     void delNode(AutoRocketNode *currNode);
 
     //Getting Data
