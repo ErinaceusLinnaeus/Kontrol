@@ -27,15 +27,19 @@ void setup() {
   printList(auroli);
 
   delay(1000);
-  auroli.newNode(auroli.currNode, setThrottle, 100);
+  auroli.newNode(setThrottle, 100);
   printList(auroli);
 
   delay(1000);
-  auroli.newNode(auroli.currNode, setStage, 1);
+  auroli.newNode(setStage, 1);
   printList(auroli);
 
   delay(1000);
-  auroli.newNode(auroli.currNode, toggleACG, 4);
+  auroli.newNode(toggleACG, 4);
+  printList(auroli);
+
+  delay(1000);
+  auroli.goToTheTop();
   printList(auroli);
 }
 

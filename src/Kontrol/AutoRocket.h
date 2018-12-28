@@ -61,6 +61,7 @@ char* getTodosString(todos action);
 class AutoRocketNode {
   
   private:
+    //The Data
     todos action;
     uint32_t value;
 
@@ -88,29 +89,36 @@ class AutoRocketNode {
 class AutoRocketList {
 
   private:
+    //The Data
     char filename[15], description[255];
-
-  public:
+    
     //The Nodes
     AutoRocketNode* firstNode;
     AutoRocketNode* lastNode;
     AutoRocketNode* currNode;
-    
+
+  public:
     //Constructor
     AutoRocketList();
-    
-    void saveScript();
 
     //Getting Data
     char* getFilename();
     char* getDescription();
+    AutoRocketNode* getFirstNode();
+    AutoRocketNode* getLastNode();
+    AutoRocketNode* getCurrNode();
     
     //Manipulating Data
+    void saveScript();
     void setFilename(char filename[15]);
     void setDescription(char description[255]);
-    
-    void newNode(AutoRocketNode *currNode, todos action, uint32_t value);
+
+    //Creating
+    void newNode(todos action, uint32_t value);
+
+    //Navigating the nodes
     void goToNextNode();
+    void goToTheTop();
 };
 
 #endif
