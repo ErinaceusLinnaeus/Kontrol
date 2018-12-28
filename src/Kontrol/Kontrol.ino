@@ -1,4 +1,4 @@
-/* (C)2018 Benjamin Schmid
+ /* (C)2018 Benjamin Schmid
 
    Kontrol is an Arduino Project to control KSP.
    The hardware includes two 3-axis-joysticks, a keyboard, a 12" HDMI Display, a 10" resistiv touchpanel.
@@ -27,15 +27,19 @@ void setup() {
   printList(auroli);
 
   delay(1000);
-  auroli.newNode(setThrottle, 100);
+  auroli.newNode(setThrottle, 100, "Full Throttle!");
   printList(auroli);
 
   delay(1000);
-  auroli.newNode(setStage, 1);
+  auroli.newNode(setStage, 1, "Staging");
   printList(auroli);
 
   delay(1000);
-  auroli.newNode(toggleACG, 4);
+  auroli.newNode(toggleACG, 4, "Action Group 4.");
+  printList(auroli);
+
+  delay(1000);
+  auroli.delNode();
   printList(auroli);
 
   delay(1000);
