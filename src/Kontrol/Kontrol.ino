@@ -54,11 +54,24 @@ void setup() {
   tft.setTextColor(TFT_ORANGE, TFT_BLACK);
   tft.setFreeFont(FM9);
 
-  auroli.currNode->newNode(auroli.currNode, setThrottle, 100);
-  auroli.currNode = auroli.currNode->nextNode;
-
+  delay(1000);
+  tft.fillScreen(TFT_BLACK);
   printList(auroli);
 
+  delay(1000);
+  tft.fillScreen(TFT_BLACK);
+  auroli.newNode(auroli.currNode, setThrottle, 100);
+  printList(auroli);
+
+  delay(1000);
+  tft.fillScreen(TFT_BLACK);
+  auroli.newNode(auroli.currNode, setStage, 1);
+  printList(auroli);
+
+  delay(1000);
+  tft.fillScreen(TFT_BLACK);
+  auroli.newNode(auroli.currNode, toggleACG, 4);
+  printList(auroli);
 }
 
 void loop() {

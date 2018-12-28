@@ -78,18 +78,22 @@ AutoRocketNode::AutoRocketNode(todos action, uint32_t value) {
   this->value = value;
 }
 
-void AutoRocketNode::newNode(AutoRocketNode *currNode, todos action, uint32_t value) {
+void AutoRocketList::newNode(AutoRocketNode *currNode, todos action, uint32_t value) {
 
   AutoRocketNode* temp;
   temp = new AutoRocketNode();
-  
-  temp->action = action;
-  temp->value = value;
+
+  temp->setAction(temp, action);
+  temp->setValue(temp, value);
+//  temp->action = action;
+//  temp->value = value;
   
   temp->prevNode = currNode;
   temp->nextNode = currNode->nextNode;
   currNode->nextNode = temp;
   temp->nextNode->prevNode = temp;
+
+  this->goToNextNode();
 }
 
 void AutoRocketNode::delNode(AutoRocketNode *node) {
@@ -99,6 +103,19 @@ void AutoRocketNode::delNode(AutoRocketNode *node) {
 
   delete node;
 }
+
+
+void AutoRocketNode::setAction(AutoRocketNode *node, todos action){
+
+  this->action = action;
+}
+
+
+void AutoRocketNode::setValue(AutoRocketNode *node, uint32_t value){
+
+  this->value = value;
+}
+
 
 todos AutoRocketNode::getAction() {
   
@@ -131,4 +148,10 @@ void AutoRocketList::setDescription(char description[255]) {
   
   strcpy(this->description, description);
 //  saveScript();
+}
+
+
+void AutoRocketList::goToNextNode(){
+
+  this->currNode = this->currNode->nextNode;
 }

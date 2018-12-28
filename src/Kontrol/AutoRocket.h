@@ -74,7 +74,6 @@ class AutoRocketNode {
     AutoRocketNode(todos action, uint32_t value);
 
     //Manage Nodes
-    void newNode(AutoRocketNode *currNode, todos action, uint32_t value);
     void delNode(AutoRocketNode *currNode);
 
     //Getting Data
@@ -82,6 +81,8 @@ class AutoRocketNode {
     uint32_t getValue();
 
     //Manipulating Data
+    void setAction(AutoRocketNode *node, todos action);
+    void setValue(AutoRocketNode *node, uint32_t value);
 };
 
 class AutoRocketList {
@@ -107,6 +108,9 @@ class AutoRocketList {
     //Manipulating Data
     void setFilename(char filename[15]);
     void setDescription(char description[255]);
+    
+    void newNode(AutoRocketNode *currNode, todos action, uint32_t value);
+    void goToNextNode();
 };
 
 #endif
