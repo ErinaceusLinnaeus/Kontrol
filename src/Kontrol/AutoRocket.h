@@ -54,7 +54,11 @@
  *      00000000 00000000 00000000 00000000
  */
  
-enum todos {waitTenthSeconds, waitForDistanceCM, waitForRAltM, waitForAltM, waitForAltKM, setThrottle, setStage, toggleACG, setAttitude, setTranslation, theExitNode};
+enum todos {waitTenthSeconds, waitForDistanceCM, waitForRAltM, waitForAltM, waitForAltKM, setThrottle, toggleACG, setAttitude, setTranslation, setSAS, theExitNode};
+
+enum acgIdentifier {acgStage, acg1, acg2, acg3, acg4, acg5, acg6, acg7, acg8, acg9, acg0, acgAbort, acgLight, acgGear, acgBrakes, acgRCS, acgSAS};
+
+enum sasMode {sasStability, sasManeuver, sasPrograde, sasRetrograde, sasNormal, sasAntinormal, sasRadialin, sasRadialout, sasTarget, sasAntitarget};
 
 char* getTodosString(todos action);
 
@@ -90,7 +94,7 @@ class AutoRocketList {
 
   private:
     //The Data
-    char filename[15], description[255];
+    char filename[31], description[255];
     
     //The Nodes
     AutoRocketNode* firstNode;
@@ -110,17 +114,20 @@ class AutoRocketList {
     
     //Manipulating Data
     void saveScript();
-    void setFilename(char filename[15]);
+    void setFilename(char filename[31]);
     void setDescription(char description[255]);
 
     //Manage Nodes
-    void newNode(todos action, uint32_t value, char information[31]);
+    void newNode(todos action, uint32_t value, char information[255]);
     void delNode();
 
     //Navigating the nodes
     void goToPrevNode();
     void goToNextNode();
     void goToTheTop();
+
+    //Activate the auto pilot
+    void launchList();
 };
 
 #endif

@@ -37,17 +37,20 @@ void printList(AutoRocketList auroli) {
 
   int i = 70;
 
+  //Printing also theExitNode
   while (temp != NULL) {
+  //Not Printing theExitNode
+  //while (temp->nextNode != NULL) {
 
     if (temp == auroli.getCurrNode()){
       tft.drawString("*", 22, i+22, GFXFF);
     }
 
     tft.drawString(getTodosString(temp->getAction()), 40, i, GFXFF);
-    tft.drawNumber(temp->getValue(), 40, i + 20, GFXFF);
-    tft.drawString(temp->getInformation(), 40, i+40, GFXFF);
+    tft.drawNumber(temp->getValue(), 240, i, GFXFF);
+    tft.drawString(temp->getInformation(), 40, i+20, GFXFF);
 
     temp = temp->nextNode;
-    i += 70;
+    i += 50;
   }
 }

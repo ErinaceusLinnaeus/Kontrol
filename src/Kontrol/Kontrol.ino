@@ -8,6 +8,7 @@
 //Including my own libraries
 #include "AutoRocket.h"
 #include "DisplayOperations.h"
+#include "send.h"
 
 
 //Create the AutoRocketList. For now only one wil ever be used.
@@ -16,32 +17,102 @@
 AutoRocketList auroli;
 
 
-
 void setup() {
 
   Serial.begin(115200);
-
+  
   initializeDisplay();
 
   delay(1000);
-  printList(auroli);
+  auroli.setFilename("Go Rocket, go.");
+  auroli.setDescription("Just playing around...");
 
-  delay(1000);
+  auroli.newNode(setThrottle, 80, "Some Throttle!");
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  auroli.newNode(setThrottle, 20, "Fewer Throttle!");
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
   auroli.newNode(setThrottle, 100, "Full Throttle!");
-  printList(auroli);
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  auroli.newNode(setThrottle, 0, "No Throttle!");
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  
+  auroli.newNode(toggleACG, acgStage, "Staging");
 
-  delay(1000);
-  auroli.newNode(setStage, 1, "Staging");
-  printList(auroli);
+  auroli.newNode(waitTenthSeconds, 30, "HICKS!");
+  
+  auroli.newNode(toggleACG, acgLight, "Light");
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  auroli.newNode(toggleACG, acgGear, "Gear");
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  auroli.newNode(toggleACG, acgBrakes, "Brakes");
 
-  delay(1000);
-  auroli.newNode(toggleACG, 4, "Action Group 4.");
-  printList(auroli);
+  auroli.newNode(waitTenthSeconds, 30, "HICKS!");
+  
+  auroli.newNode(toggleACG, acgSAS, "SAS");
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  auroli.newNode(toggleACG, acgRCS, "RCS");
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  auroli.newNode(toggleACG, acgAbort, "Abort");
 
+  auroli.newNode(waitTenthSeconds, 30, "HICKS!");
+  
+  auroli.newNode(toggleACG, acg1, "1");
+
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  
+  auroli.newNode(toggleACG, acg2, "2");
+
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  
+  auroli.newNode(toggleACG, acg3, "3");
+
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  
+  auroli.newNode(toggleACG, acg4, "4");
+
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  
+  auroli.newNode(toggleACG, acg5, "5");
+
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  
+  auroli.newNode(toggleACG, acg6, "6");
+
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  
+  auroli.newNode(toggleACG, acg7, "7");
+
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  
+  auroli.newNode(toggleACG, acg8, "8");
+
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  
+  auroli.newNode(toggleACG, acg9, "9");
+
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  
+  auroli.newNode(toggleACG, acg0, "0");
+  
+  auroli.newNode(waitTenthSeconds, 30, "HICKS!");
+    
+  printList(auroli);
+  delay(3000);
+  
+/*
   delay(1000);
   auroli.delNode();
   printList(auroli);
+*/
+/*
+  delay(1000);
+  auroli.goToNextNode();
+  printList(auroli);
+*/
 
+
+  initializeSimpit();
+  
   delay(1000);
   auroli.goToTheTop();
   printList(auroli);
@@ -49,4 +120,6 @@ void setup() {
 
 void loop() {
 
+  updateSimpit();
+  auroli.launchList();
 }

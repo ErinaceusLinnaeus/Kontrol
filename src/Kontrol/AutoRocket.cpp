@@ -5,37 +5,90 @@
 
 #include "AutoRocket.h"
 #include <string.h>
+//to use sprintf - convert integer to char*
+#include <stdio.h>
+#include "send.h"
+
+#if defined(ARDUINO) && ARDUINO >= 100
+  #include "Arduino.h"
+#else
+  #include "WProgram.h"
+#endif
+
 
 char* getTodosString(todos action){
   
   switch(action){
-      case 0:
-        return"waitTenthSeconds";
-      case 1:
+      case waitTenthSeconds:
+       return "waitTenthSeconds";
+      case waitForDistanceCM:
        return "waitForDistanceCM";
-      case 2:
+      case waitForRAltM:
        return "waitForRAltM";
-      case 3:
+      case waitForAltM:
        return "waitForAltM";
-      case 4:
+      case waitForAltKM:
        return "waitForAltKM";
-      case 5:
+      case setThrottle:
        return "setThrottle";
-      case 6:
-       return "setStage";
-      case 7:
+      case toggleACG:
        return "toggleACG";
-      case 8:
+      case setAttitude:
        return "setAttitude";
-      case 9:
+      case setTranslation:
        return "setTranslation";
-      case 10:
+      case setSAS:
+       return "setSAS";
+      case theExitNode:
        return "theExitNode";
       default:
        return "outOfRange";
     }
 }
 
+void AutoRocketList::launchList() {
+
+  AutoRocketNode* currNode = this->firstNode;
+
+  while(currNode != NULL) {
+
+    int currAction = currNode->getAction();
+    int currValue = currNode->getValue();
+
+    if (currAction == waitTenthSeconds)
+      //Wait some time
+      delay(currValue * 100);
+    else if (currAction == waitForDistanceCM)
+      //Wait for a distance [cm]
+      NULL;
+    else if (currAction == waitForRAltM)
+      //Wait for radar altitude [m]
+      NULL;
+    else if (currAction == waitForAltM)
+      //Wait for altitude [m]
+      NULL;
+    else if (currAction == waitForAltKM)
+      //Wait for altitude [km]
+      NULL;
+    else if (currAction == setThrottle)
+      //Set throttle
+      sendThrottle(currValue);
+    else if (currAction == toggleACG)
+      //Toggle an action group
+      sendACG(currValue);
+    else if (currAction == setAttitude)
+      //Set an attitude
+      NULL;
+    else if (currAction == setTranslation)
+      //Set a translation
+      NULL;
+    else if (currAction == setSAS)
+      //Set SAS Mode
+      sendSAS(currValue);
+    
+    currNode = currNode->nextNode;
+  }
+}
 
 AutoRocketList::AutoRocketList() {
 
@@ -59,7 +112,6 @@ AutoRocketList::AutoRocketList() {
 //Save to SD Card
 void AutoRocketList::saveScript() {
 
-  NULL;
 }
 
 
@@ -171,7 +223,7 @@ AutoRocketNode* AutoRocketList::getCurrNode(){
   return this->currNode;
 }
 
-void AutoRocketList::setFilename(char filename[15]) {
+void AutoRocketList::setFilename(char filename[31]) {
   
   strcpy(this->filename, filename);
 //  saveScript();
@@ -187,7 +239,12 @@ void AutoRocketList::setDescription(char description[255]) {
 
 void AutoRocketList::goToNextNode(){
 
-  this->currNode = this->currNode->nextNode;
+  //Don't try to jump over theExitNode
+  if (this->currNode->nextNode != NULL)
+    this->currNode = this->currNode->nextNode;
+   else
+    //We reached the end of the list
+    NULL;
 }
 
 
