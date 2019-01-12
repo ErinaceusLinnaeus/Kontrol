@@ -56,7 +56,7 @@
  
 enum todos {waitTenthSeconds, waitForDistanceCM, waitForRAltM, waitForAltM, waitForAltKM, setThrottle, toggleACG, setAttitude, setTranslation, setSAS, theExitNode};
 
-enum acgIdentifier {acgStage, acg1, acg2, acg3, acg4, acg5, acg6, acg7, acg8, acg9, acg0, acgAbort, acgLight, acgGear, acgBrakes, acgRCS, acgSAS};
+enum acgIdentifier {acgStage, acg1, acg2, acg3, acg4, acg5, acg6, acg7, acg8, acg9, acg10, acgAbort, acgLight, acgGear, acgBrakes, acgRCS, acgSAS};
 
 enum sasMode {sasStability, sasManeuver, sasPrograde, sasRetrograde, sasNormal, sasAntinormal, sasRadialin, sasRadialout, sasTarget, sasAntitarget};
 

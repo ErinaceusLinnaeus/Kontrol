@@ -1,0 +1,92 @@
+﻿############################################
+# Syntax Coloring Map For AutoRocket & DisplayOperations
+############################################
+
+############################################
+# Datatypes (KEYWORD1)
+############################################
+
+todos	KEYWORD1
+acgIdentifier	KEYWORD1
+sasMode	KEYWORD1
+AutoRocketNode	KEYWORD1
+AutoRocketList	KEYWORD1
+
+############################################
+# Methods and Functions (KEYWORD2)
+############################################
+
+getTodosString	KEYWORD2
+getAction	KEYWORD2
+getValue	KEYWORD2
+getInformation	KEYWORD2
+setAction	KEYWORD2
+setValue	KEYWORD2
+setInformation	KEYWORD2
+saveScript	KEYWORD2
+setFilename	KEYWORD2
+setDescription	KEYWORD2
+newNode	KEYWORD2
+delNode	KEYWORD2
+goToPrevNode	KEYWORD2
+goToNextNode	KEYWORD2
+goToTheTop	KEYWORD2
+launchList	KEYWORD2
+
+initializeDisplay	KEYWORD2
+printBlack	KEYWORD2
+printInt	KEYWORD2
+printList	KEYWORD2
+
+############################################
+# Constants (LITERAL1)
+############################################
+
+waitTenthSeconds	LITERAL1
+waitForDistanceCM	LITERAL1
+waitForRAltM	LITERAL1
+waitForAltM	LITERAL1
+waitForAltKM	LITERAL1
+setThrottle	LITERAL1
+toggleACG	LITERAL1
+setAttitude	LITERAL1
+setTranslation	LITERAL1
+setSAS	LITERAL1
+theExitNode	LITERAL1
+acgStage	LITERAL1
+acg1	LITERAL1
+acg2	LITERAL1
+acg3	LITERAL1
+acg4	LITERAL1
+acg5	LITERAL1
+acg6	LITERAL1
+acg7	LITERAL1
+acg8	LITERAL1
+acg9	LITERAL1
+acg0	LITERAL1
+acgAbort	LITERAL1
+acgLight	LITERAL1
+acgGear	LITERAL1
+acgBrakes	LITERAL1
+acgRCS	LITERAL1
+acgSAS	LITERAL1
+sasStability	LITERAL1
+sasManeuver	LITERAL1
+sasPrograde	LITERAL1
+sasRetrograde	LITERAL1
+sasNormal	LITERAL1
+sasAntinormal	LITERAL1
+sasRadialin	LITERAL1
+sasRadialout	LITERAL1
+sasTarget	LITERAL1
+sasAntitarget	LITERAL1
+action	LITERAL1
+value	LITERAL1
+information	LITERAL1
+prevNode	LITERAL1
+nextNode	LITERAL1
+filename	LITERAL1
+description	LITERAL1
+firstNode	LITERAL1
+lastNode	LITERAL1
+currNode	LITERAL1
