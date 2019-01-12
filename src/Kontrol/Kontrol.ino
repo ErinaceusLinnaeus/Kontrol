@@ -5,6 +5,55 @@
    Interfacing with KSP through KerbalSimPit, an Arduino library written by Peter Hardy.
 */
 
+/*
+Things that do work:
+  
+  auroli.setFilename("Go Rocket, go.");
+  auroli.setDescription("Just playing around...");
+  auroli.delNode();
+  auroli.goToTheTop();
+
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  
+  auroli.newNode(toggleACG, acgStage, "Staging");
+  
+  auroli.newNode(toggleACG, acgSAS, "SAS");
+  auroli.newNode(toggleACG, acgRCS, "RCS");
+  
+  auroli.newNode(toggleACG, acgLight, "Light");
+  auroli.newNode(toggleACG, acgGear, "Gear");
+  auroli.newNode(toggleACG, acgBrakes, "Brakes");
+  auroli.newNode(toggleACG, acgAbort, "Abort");
+  
+  auroli.newNode(toggleACG, acg1, "1");  
+  auroli.newNode(toggleACG, acg2, "2");
+  auroli.newNode(toggleACG, acg3, "3");
+  auroli.newNode(toggleACG, acg4, "4");
+  auroli.newNode(toggleACG, acg5, "5");
+  auroli.newNode(toggleACG, acg6, "6");
+  auroli.newNode(toggleACG, acg7, "7");
+  auroli.newNode(toggleACG, acg8, "8");
+  auroli.newNode(toggleACG, acg9, "9");  
+  auroli.newNode(toggleACG, acg0, "0");
+  
+Nonworking, so far:
+   
+  auroli.newNode(toggleACG, acgSAS, "SAS");  
+  auroli.newNode(setSAS, sasStability, "Stability");
+  auroli.newNode(setSAS, sasManeuver, "Maneuver");  
+  auroli.newNode(setSAS, sasPrograde, "Prograde");
+  auroli.newNode(setSAS, sasRetrograde, "Retrograde");
+  auroli.newNode(setSAS, sasNormal, "Normal");
+  auroli.newNode(setSAS, sasAntinormal, "Antinormal");
+  auroli.newNode(setSAS, sasRadialin, "Radial In");
+  auroli.newNode(setSAS, sasRadialout, "Radial Out");
+  auroli.newNode(setSAS, sasTarget, "Target");
+  auroli.newNode(setSAS, sasAntitarget, "Antitarget");
+  
+  auroli.newNode(setThrottle, 80, "Some Throttle!");
+ */
+
+
 //Including my own libraries
 #include "AutoRocket.h"
 #include "DisplayOperations.h"
@@ -26,90 +75,8 @@ void setup() {
   delay(1000);
   auroli.setFilename("Go Rocket, go.");
   auroli.setDescription("Just playing around...");
-
-  auroli.newNode(setThrottle, 80, "Some Throttle!");
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  auroli.newNode(setThrottle, 20, "Fewer Throttle!");
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  auroli.newNode(setThrottle, 100, "Full Throttle!");
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  auroli.newNode(setThrottle, 0, "No Throttle!");
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  
-  auroli.newNode(toggleACG, acgStage, "Staging");
-
-  auroli.newNode(waitTenthSeconds, 30, "HICKS!");
-  
-  auroli.newNode(toggleACG, acgLight, "Light");
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  auroli.newNode(toggleACG, acgGear, "Gear");
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  auroli.newNode(toggleACG, acgBrakes, "Brakes");
-
-  auroli.newNode(waitTenthSeconds, 30, "HICKS!");
-  
-  auroli.newNode(toggleACG, acgSAS, "SAS");
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  auroli.newNode(toggleACG, acgRCS, "RCS");
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  auroli.newNode(toggleACG, acgAbort, "Abort");
-
-  auroli.newNode(waitTenthSeconds, 30, "HICKS!");
-  
-  auroli.newNode(toggleACG, acg1, "1");
-
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  
-  auroli.newNode(toggleACG, acg2, "2");
-
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  
-  auroli.newNode(toggleACG, acg3, "3");
-
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  
-  auroli.newNode(toggleACG, acg4, "4");
-
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  
-  auroli.newNode(toggleACG, acg5, "5");
-
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  
-  auroli.newNode(toggleACG, acg6, "6");
-
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  
-  auroli.newNode(toggleACG, acg7, "7");
-
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  
-  auroli.newNode(toggleACG, acg8, "8");
-
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  
-  auroli.newNode(toggleACG, acg9, "9");
-
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  
-  auroli.newNode(toggleACG, acg0, "0");
-  
-  auroli.newNode(waitTenthSeconds, 30, "HICKS!");
-    
   printList(auroli);
   delay(3000);
-  
-/*
-  delay(1000);
-  auroli.delNode();
-  printList(auroli);
-*/
-/*
-  delay(1000);
-  auroli.goToNextNode();
-  printList(auroli);
-*/
-
 
   initializeSimpit();
   

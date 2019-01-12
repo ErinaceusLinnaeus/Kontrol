@@ -25,6 +25,16 @@ void initializeDisplay(){
   tft.setFreeFont(FM9);
 }
 
+void printBlack() {
+  
+  tft.fillScreen(TFT_BLACK);
+}
+
+void printInt(int i) {
+
+  tft.drawNumber(i, 240, 100, GFXFF);
+}
+
 
 void printList(AutoRocketList auroli) {
 
@@ -43,14 +53,15 @@ void printList(AutoRocketList auroli) {
   //while (temp->nextNode != NULL) {
 
     if (temp == auroli.getCurrNode()){
-      tft.drawString("*", 22, i+22, GFXFF);
+      tft.drawString("*", 22, i+2, GFXFF);//+22, GFXFF);
     }
 
     tft.drawString(getTodosString(temp->getAction()), 40, i, GFXFF);
     tft.drawNumber(temp->getValue(), 240, i, GFXFF);
-    tft.drawString(temp->getInformation(), 40, i+20, GFXFF);
+//    tft.drawString(temp->getInformation(), 40, i+20, GFXFF);
 
     temp = temp->nextNode;
-    i += 50;
+//    i += 50;
+    i += 30;
   }
 }

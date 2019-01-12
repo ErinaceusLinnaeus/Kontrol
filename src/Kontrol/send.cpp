@@ -45,28 +45,27 @@ void sendACG(uint32_t acg) {
 }
 
 void sendSAS(uint32_t sas) {
-/*
-  //Doesn't compile SAS_MODE_MESSAGE & AP_... are not declared in this scope
+
   if (sas == sasStability)
-    mySimpit.send(SAS_MODE_MESSAGE, AP_STABILITYASSIST, 1);
+    mySimpit.setSASMode(AP_STABILITYASSIST);
   else if (sas == sasManeuver)
-    mySimpit.send(SAS_MODE_MESSAGE, AP_PROGRADE, 1);
+    mySimpit.setSASMode(AP_PROGRADE);
   else if (sas == sasPrograde)
-    mySimpit.send(SAS_MODE_MESSAGE, AP_RETROGRADE, 1);
+    mySimpit.setSASMode(AP_RETROGRADE);
   else if (sas == sasRetrograde)
-    mySimpit.send(SAS_MODE_MESSAGE, AP_NORMAL, 1);
+    mySimpit.setSASMode(AP_NORMAL);
   else if (sas == sasNormal)
-    mySimpit.send(SAS_MODE_MESSAGE, AP_ANTINORMAL, 1);
-  else if (sas == sasAnti)
-    mySimpit.send(SAS_MODE_MESSAGE, AP_RADIALIN, 1);
+    mySimpit.setSASMode(AP_ANTINORMAL);
+  else if (sas == sasAntinormal)
+    mySimpit.setSASMode(AP_RADIALIN);
   else if (sas == sasRadialin)
-    mySimpit.send(SAS_MODE_MESSAGE, AP_RADIALOUT, 1);
+    mySimpit.setSASMode(AP_RADIALOUT);
   else if (sas == sasRadialout)
-    mySimpit.send(SAS_MODE_MESSAGE, AP_TARGET, 1);
+    mySimpit.setSASMode(AP_TARGET);
   else if (sas == sasTarget)
-    mySimpit.send(SAS_MODE_MESSAGE, AP_ANTITARGET, 1);
+    mySimpit.setSASMode(AP_ANTITARGET);
   else if (sas == sasAntitarget)
-    mySimpit.send(SAS_MODE_MESSAGE, AP_MANEUVER, 1);*/
+    mySimpit.setSASMode(AP_MANEUVER);
 }
 
 void sendThrottle(uint32_t throttle) {
