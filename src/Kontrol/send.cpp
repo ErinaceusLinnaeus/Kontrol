@@ -79,6 +79,7 @@ void sendSAS(uint32_t sas) {
   else if (sas == sasAntitarget)
     mySASMode = AP_ANTITARGET;
     
+//  mySimpit.send(SAS_MODE_MESSAGE, mySASMode, 1);
   mySimpit.send(SAS_MODE_MESSAGE, mySASMode);
 */
 
