@@ -37,6 +37,8 @@
   auroli.newNode(toggleACG, acg8, "8");
   auroli.newNode(toggleACG, acg9, "9");
   auroli.newNode(toggleACG, acg10, "10");
+  
+  auroli.newNode(setThrottle, 80, "Some Throttle!");
 
   Nonworking, so far:
 
@@ -51,8 +53,6 @@
   auroli.newNode(setSAS, sasRadialout, "Radial Out");
   auroli.newNode(setSAS, sasTarget, "Target");
   auroli.newNode(setSAS, sasAntitarget, "Antitarget");
-
-  auroli.newNode(setThrottle, 80, "Some Throttle!");
   
   auroli.newNode(setAttitude, 512, "Attitude");
 */
@@ -75,15 +75,26 @@ void setup() {
   Serial.begin(115200);
 
   initializePins();
-  initializeDisplay();
-//  initializeSimpit();
+//  initializeDisplay();
+  initializeSimpit();
+  
+  auroli.newNode(setThrottle, 0, "Zero Throttle!");
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  auroli.newNode(setThrottle, 25, "Quarter Throttle!");
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  auroli.newNode(setThrottle, 50, "Half Throttle!");
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  auroli.newNode(setThrottle, 75, "Threequarter Throttle!");
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  auroli.newNode(setThrottle, 100, "Full Throttle!");
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
 }
 
 void loop() {
 
-//  updateSimpit();
+  updateSimpit();
 
-
+/*
   
   Serial.println("---");
   Serial.println("---");
@@ -101,7 +112,9 @@ void loop() {
   Serial.println(getRCSy());
   Serial.print("z     : ");
   Serial.println(getRCSz());
+*/
+//  sendAttitude(getSASpitch(), getSASyaw(), getSASroll());
       
   delay(500);
-//  auroli.launchList();
+  auroli.launchList();
 }

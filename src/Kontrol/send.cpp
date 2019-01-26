@@ -76,9 +76,9 @@ void sendSAS(uint32_t sas) {
 
 void sendThrottle(int16_t throttle) {
 
-  //Doesn't work!
+  //I use %, but KSP expects 0 -> 32767
+  throttle = throttle * 327,67;
   mySimpit.send(THROTTLE_MESSAGE, (unsigned char*) &throttle, 2);
-//  mySimpit.send(THROTTLE_MESSAGE, throttle);
 }
 
 void sendAttitude(int16_t pitch, int16_t yaw, int16_t roll) {
