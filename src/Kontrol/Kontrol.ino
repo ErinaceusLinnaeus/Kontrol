@@ -13,6 +13,8 @@
   auroli.delNode();
   auroli.goToTheTop();
 
+  printList(auroli);
+
   auroli.newNode(waitTenthSeconds, 10, "HICKS!");
 
   auroli.newNode(toggleACG, acgStage, "Staging");
@@ -51,6 +53,8 @@
   auroli.newNode(setSAS, sasAntitarget, "Antitarget");
 
   auroli.newNode(setThrottle, 80, "Some Throttle!");
+  
+  auroli.newNode(setAttitude, 512, "Attitude");
 */
 
 
@@ -58,9 +62,9 @@
 #include "AutoRocket.h"
 #include "DisplayOperations.h"
 #include "send.h"
+#include "joysticks.h"
 
-
-//Create the AutoRocketList. For now only one wil ever be used.
+//Create the AutoRocketList. Only one will ever be used.
 //Loading or starting a new one will unload the current Script.
 //Acronym for AutoRocketList; isn't it cute?
 AutoRocketList auroli;
@@ -70,23 +74,34 @@ void setup() {
 
   Serial.begin(115200);
 
+  initializePins();
   initializeDisplay();
-
-  delay(1000);
-  auroli.setFilename("Go Rocket, go.");
-  auroli.setDescription("Just playing around...");
-  printList(auroli);
-  delay(3000);
-
-  initializeSimpit();
-
-  delay(1000);
-  auroli.goToTheTop();
-  printList(auroli);
+//  initializeSimpit();
 }
 
 void loop() {
 
-  updateSimpit();
-  auroli.launchList();
+//  updateSimpit();
+
+
+  
+  Serial.println("---");
+  Serial.println("---");
+    
+  Serial.print("pitch : ");
+  Serial.println(getSASpitch());
+  Serial.print("yaw   : ");
+  Serial.println(getSASyaw());
+  Serial.print("roll  : ");
+  Serial.println(getSASroll());
+
+  Serial.print("x     : ");
+  Serial.println(getRCSx());
+  Serial.print("y     : ");
+  Serial.println(getRCSy());
+  Serial.print("z     : ");
+  Serial.println(getRCSz());
+      
+  delay(500);
+//  auroli.launchList();
 }

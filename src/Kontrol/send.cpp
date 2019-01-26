@@ -11,12 +11,18 @@
 // communicate using the "Serial" device.
 KerbalSimpit mySimpit(Serial);
 
+rotationMessage myAttitude;
 
 void initializeSimpit() {
       
   // This loop continually attempts to handshake with the plugin.
   // It will keep retrying until it gets a successful handshake.
   while (!mySimpit.init());
+
+  //needed to send throttle
+  mySimpit.registerChannel(THROTTLE_MESSAGE);
+  //needed to send attitude
+  mySimpit.registerChannel(ROTATION_MESSAGE);
 }
 
 void updateSimpit() {
@@ -68,8 +74,17 @@ void sendSAS(uint32_t sas) {
     mySimpit.setSASMode(AP_MANEUVER);
 }
 
-void sendThrottle(uint32_t throttle) {
+void sendThrottle(int16_t throttle) {
 
   //Doesn't work!
   mySimpit.send(THROTTLE_MESSAGE, (unsigned char*) &throttle, 2);
+//  mySimpit.send(THROTTLE_MESSAGE, throttle);
+}
+
+void sendAttitude(int16_t pitch, int16_t yaw, int16_t roll) {
+
+  myAttitude.pitch = pitch;
+  myAttitude.yaw = yaw;
+  myAttitude.roll = roll;
+  mySimpit.send(ROTATION_MESSAGE, myAttitude);
 }

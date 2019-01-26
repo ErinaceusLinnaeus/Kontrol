@@ -78,7 +78,7 @@ void AutoRocketList::launchList() {
       sendACG(currValue);
     else if (currAction == setAttitude)
       //Set an attitude
-      NULL;
+      sendAttitude(currValue, currValue, currValue);
     else if (currAction == setTranslation)
       //Set a translation
       NULL;

@@ -12,6 +12,8 @@ void sendACG(uint32_t acg);
 
 void sendSAS(uint32_t sas);
 
-void sendThrottle(uint32_t throttle);
+void sendThrottle(int16_t throttle);
+
+void sendAttitude(int16_t pitch, int16_t yaw, int16_t roll);
 
 #endif
