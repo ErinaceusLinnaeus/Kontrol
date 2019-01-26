@@ -12,6 +12,7 @@
 KerbalSimpit mySimpit(Serial);
 
 rotationMessage myAttitude;
+translationMessage myTranslation;
 
 void initializeSimpit() {
       
@@ -23,6 +24,8 @@ void initializeSimpit() {
   mySimpit.registerChannel(THROTTLE_MESSAGE);
   //needed to send attitude
   mySimpit.registerChannel(ROTATION_MESSAGE);
+  //needed to send translation
+  mySimpit.registerChannel(TRANSLATION_MESSAGE);
 }
 
 void updateSimpit() {
@@ -87,4 +90,12 @@ void sendAttitude(int16_t pitch, int16_t yaw, int16_t roll) {
   myAttitude.yaw = yaw;
   myAttitude.roll = roll;
   mySimpit.send(ROTATION_MESSAGE, myAttitude);
+}
+
+void sendTranslation(int16_t x, int16_t y, int16_t z) {
+
+  myTranslation.X = x;
+  myTranslation.Y = y;
+  myTranslation.Z = z;
+  mySimpit.send(TRANSLATION_MESSAGE, myTranslation);
 }

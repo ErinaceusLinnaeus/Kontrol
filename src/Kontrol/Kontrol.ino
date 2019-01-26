@@ -77,17 +77,6 @@ void setup() {
   initializePins();
 //  initializeDisplay();
   initializeSimpit();
-  
-  auroli.newNode(setThrottle, 0, "Zero Throttle!");
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  auroli.newNode(setThrottle, 25, "Quarter Throttle!");
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  auroli.newNode(setThrottle, 50, "Half Throttle!");
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  auroli.newNode(setThrottle, 75, "Threequarter Throttle!");
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  auroli.newNode(setThrottle, 100, "Full Throttle!");
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
 }
 
 void loop() {
@@ -113,8 +102,10 @@ void loop() {
   Serial.print("z     : ");
   Serial.println(getRCSz());
 */
-//  sendAttitude(getSASpitch(), getSASyaw(), getSASroll());
-      
+
+  sendAttitude(getSASpitch(), getSASyaw(), getSASroll());
+  sendTranslation(getRCSx(), getRCSy(), getRCSz());
+  
   delay(500);
   auroli.launchList();
 }
