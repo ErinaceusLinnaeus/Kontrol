@@ -11,8 +11,9 @@
 // communicate using the "Serial" device.
 KerbalSimpit mySimpit(Serial);
 
-rotationMessage myAttitude;
+rotationMessage myRotation;
 translationMessage myTranslation;
+AutopilotMode mySASMode;
 
 void initializeSimpit() {
       
@@ -26,6 +27,8 @@ void initializeSimpit() {
   mySimpit.registerChannel(ROTATION_MESSAGE);
   //needed to send translation
   mySimpit.registerChannel(TRANSLATION_MESSAGE);
+  //needed to send translation
+  mySimpit.registerChannel(SAS_MODE_MESSAGE);
 }
 
 void updateSimpit() {
@@ -54,27 +57,51 @@ void sendACG(uint32_t acg) {
 }
 
 void sendSAS(uint32_t sas) {
+/*
+  if (sas == sasStability)
+    mySASMode = AP_STABILITYASSIST;
+  else if (sas == sasManeuver)
+    mySASMode = AP_MANEUVER;
+  else if (sas == sasPrograde)
+    mySASMode = AP_PROGRADE;
+  else if (sas == sasRetrograde)
+    mySASMode = AP_RETROGRADE;
+  else if (sas == sasNormal)
+    mySASMode = AP_NORMAL;
+  else if (sas == sasAntinormal)
+    mySASMode = AP_ANTINORMAL;
+  else if (sas == sasRadialin)
+    mySASMode = AP_RADIALIN;
+  else if (sas == sasRadialout)
+    mySASMode = AP_RADIALOUT;
+  else if (sas == sasTarget)
+    mySASMode = AP_TARGET;
+  else if (sas == sasAntitarget)
+    mySASMode = AP_ANTITARGET;
+    
+  mySimpit.send(SAS_MODE_MESSAGE, mySASMode);
+*/
 
   if (sas == sasStability)
     mySimpit.setSASMode(AP_STABILITYASSIST);
   else if (sas == sasManeuver)
-    mySimpit.setSASMode(AP_PROGRADE);
-  else if (sas == sasPrograde)
-    mySimpit.setSASMode(AP_RETROGRADE);
-  else if (sas == sasRetrograde)
-    mySimpit.setSASMode(AP_NORMAL);
-  else if (sas == sasNormal)
-    mySimpit.setSASMode(AP_ANTINORMAL);
-  else if (sas == sasAntinormal)
-    mySimpit.setSASMode(AP_RADIALIN);
-  else if (sas == sasRadialin)
-    mySimpit.setSASMode(AP_RADIALOUT);
-  else if (sas == sasRadialout)
-    mySimpit.setSASMode(AP_TARGET);
-  else if (sas == sasTarget)
-    mySimpit.setSASMode(AP_ANTITARGET);
-  else if (sas == sasAntitarget)
     mySimpit.setSASMode(AP_MANEUVER);
+  else if (sas == sasPrograde)
+    mySimpit.setSASMode(AP_PROGRADE);
+  else if (sas == sasRetrograde)
+    mySimpit.setSASMode(AP_RETROGRADE);
+  else if (sas == sasNormal)
+    mySimpit.setSASMode(AP_NORMAL);
+  else if (sas == sasAntinormal)
+    mySimpit.setSASMode(AP_ANTINORMAL);
+  else if (sas == sasRadialin)
+    mySimpit.setSASMode(AP_RADIALIN);
+  else if (sas == sasRadialout)
+    mySimpit.setSASMode(AP_RADIALOUT);
+  else if (sas == sasTarget)
+    mySimpit.setSASMode(AP_TARGET);
+  else if (sas == sasAntitarget)
+    mySimpit.setSASMode(AP_ANTITARGET);
 }
 
 void sendThrottle(int16_t throttle) {
@@ -84,12 +111,13 @@ void sendThrottle(int16_t throttle) {
   mySimpit.send(THROTTLE_MESSAGE, (unsigned char*) &throttle, 2);
 }
 
-void sendAttitude(int16_t pitch, int16_t yaw, int16_t roll) {
+void sendRotation(int16_t pitch, int16_t yaw, int16_t roll) {
 
-  myAttitude.pitch = pitch;
-  myAttitude.yaw = yaw;
-  myAttitude.roll = roll;
-  mySimpit.send(ROTATION_MESSAGE, myAttitude);
+  myRotation.pitch = pitch;
+  myRotation.yaw = yaw;
+  myRotation.roll = roll;
+  myRotation.mask = 7;
+  mySimpit.send(ROTATION_MESSAGE, myRotation);
 }
 
 void sendTranslation(int16_t x, int16_t y, int16_t z) {
@@ -97,5 +125,6 @@ void sendTranslation(int16_t x, int16_t y, int16_t z) {
   myTranslation.X = x;
   myTranslation.Y = y;
   myTranslation.Z = z;
+  myTranslation.mask = 7;
   mySimpit.send(TRANSLATION_MESSAGE, myTranslation);
 }

@@ -33,10 +33,6 @@ char* getTodosString(todos action){
        return "setThrottle";
       case toggleACG:
        return "toggleACG";
-      case setAttitude:
-       return "setAttitude";
-      case setTranslation:
-       return "setTranslation";
       case setSAS:
        return "setSAS";
       case theExitNode:
@@ -76,13 +72,6 @@ void AutoRocketList::launchList() {
     else if (currAction == toggleACG)
       //Toggle an action group
       sendACG(currValue);
-    else if (currAction == setAttitude)
-      //Set an attitude
-      sendAttitude(currValue, currValue, currValue);
-    else if (currAction == setTranslation)
-      //Set a translation
-      NULL;
-    else if (currAction == setSAS)
       //Set SAS Mode
       sendSAS(currValue);
     
@@ -121,7 +110,7 @@ AutoRocketNode::AutoRocketNode() {
   //Defining default values for the first node
   this->action = waitTenthSeconds;
   this->value = 30;
-  strcpy(this->information, "Waiting...");
+  strcpy(this->information, "Wait for 3 sec...");
 }
 
 //Constructing a Node
@@ -140,8 +129,6 @@ void AutoRocketList::newNode(todos action, uint32_t value, char information[31])
   temp->setAction(temp, action);
   temp->setValue(temp, value);
   temp->setInformation(temp, information);
-//  temp->action = action;
-//  temp->value = value;
   
   temp->prevNode = currNode;
   temp->nextNode = currNode->nextNode;

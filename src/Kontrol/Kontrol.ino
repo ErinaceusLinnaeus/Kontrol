@@ -39,10 +39,16 @@
   auroli.newNode(toggleACG, acg10, "10");
   
   auroli.newNode(setThrottle, 80, "Some Throttle!");
+  
+  auroli.newNode(setRotationPitch, 512, "RotationPitch");
+  auroli.newNode(setRotationYaw, 512, "RotationYaw");
+  auroli.newNode(setRotationRoll, 512, "RotationRoll");
+  auroli.newNode(setTranslationX, 512, "TranslationX");
+  auroli.newNode(setTranslationY, 512, "TranslationY");
+  auroli.newNode(setTranslationZ, 512, "TranslationZ");
 
   Nonworking, so far:
 
-  auroli.newNode(toggleACG, acgSAS, "SAS");
   auroli.newNode(setSAS, sasStability, "Stability");
   auroli.newNode(setSAS, sasManeuver, "Maneuver");
   auroli.newNode(setSAS, sasPrograde, "Prograde");
@@ -53,8 +59,6 @@
   auroli.newNode(setSAS, sasRadialout, "Radial Out");
   auroli.newNode(setSAS, sasTarget, "Target");
   auroli.newNode(setSAS, sasAntitarget, "Antitarget");
-  
-  auroli.newNode(setAttitude, 512, "Attitude");
 */
 
 
@@ -77,14 +81,45 @@ void setup() {
   initializePins();
 //  initializeDisplay();
   initializeSimpit();
+
+  auroli.newNode(toggleACG, acgLight, "Light");
+  auroli.newNode(setSAS, sasStability, "Stability");
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  auroli.newNode(toggleACG, acgLight, "Light");
+  auroli.newNode(setSAS, sasManeuver, "Maneuver");
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  auroli.newNode(toggleACG, acgLight, "Light");
+  auroli.newNode(setSAS, sasPrograde, "Prograde");
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  auroli.newNode(toggleACG, acgLight, "Light");
+  auroli.newNode(setSAS, sasRetrograde, "Retrograde");
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  auroli.newNode(toggleACG, acgLight, "Light");
+  auroli.newNode(setSAS, sasNormal, "Normal");
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  auroli.newNode(toggleACG, acgLight, "Light");
+  auroli.newNode(setSAS, sasAntinormal, "Antinormal");
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  auroli.newNode(toggleACG, acgLight, "Light");
+  auroli.newNode(setSAS, sasRadialin, "Radial In");
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  auroli.newNode(toggleACG, acgLight, "Light");
+  auroli.newNode(setSAS, sasRadialout, "Radial Out");
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  auroli.newNode(toggleACG, acgLight, "Light");
+  auroli.newNode(setSAS, sasTarget, "Target");
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
+  auroli.newNode(toggleACG, acgLight, "Light");
+  auroli.newNode(setSAS, sasAntitarget, "Antitarget");
+  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
 }
 
 void loop() {
 
   updateSimpit();
 
-/*
-  
+
+ /* 
   Serial.println("---");
   Serial.println("---");
     
@@ -101,11 +136,11 @@ void loop() {
   Serial.println(getRCSy());
   Serial.print("z     : ");
   Serial.println(getRCSz());
-*/
 
-  sendAttitude(getSASpitch(), getSASyaw(), getSASroll());
+*/
+  sendRotation(getSASpitch(), getSASyaw(), getSASroll());
   sendTranslation(getRCSx(), getRCSy(), getRCSz());
   
-  delay(500);
+//  delay(500);
   auroli.launchList();
 }

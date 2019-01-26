@@ -14,7 +14,7 @@ void sendSAS(uint32_t sas);
 
 void sendThrottle(int16_t throttle);
 
-void sendAttitude(int16_t pitch, int16_t yaw, int16_t roll);
+void sendRotation(int16_t pitch, int16_t yaw, int16_t roll);
 
 void sendTranslation(int16_t x, int16_t y, int16_t z);
 

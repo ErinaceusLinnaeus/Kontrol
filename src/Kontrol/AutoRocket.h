@@ -44,17 +44,11 @@
  *      11111111 11111111 11111111 11111111
  *    actiongroup, also SAS, RCS, Brakes, Gear, etc.
  *      00000000 00000000 00000000 0xxxxxxx
- *    attitude
- *      00000xxx xxxxxxyy yyyyyyyz zzzzzzzz                    ->  360° (z) + 360°*512 (y) + 360°*262.144 (x)
- *      x, y, z in planetary reference frame
- *    translation
- *      00000xxx xxxxxxyy yyyyyyyz zzzzzzzz                    ->  360° (z) + 360°*512 (y) + 360°*262.144 (x)
- *      x, y, z in planetary reference frame
  *    exit (exit point at last node)
  *      00000000 00000000 00000000 00000000
  */
  
-enum todos {waitTenthSeconds, waitForDistanceCM, waitForRAltM, waitForAltM, waitForAltKM, setThrottle, toggleACG, setAttitude, setTranslation, setSAS, theExitNode};
+enum todos {waitTenthSeconds, waitForDistanceCM, waitForRAltM, waitForAltM, waitForAltKM, setThrottle, toggleACG, setSAS, theExitNode};
 
 enum acgIdentifier {acgStage, acg1, acg2, acg3, acg4, acg5, acg6, acg7, acg8, acg9, acg10, acgAbort, acgLight, acgGear, acgBrakes, acgRCS, acgSAS};
 

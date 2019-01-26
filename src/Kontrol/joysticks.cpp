@@ -44,6 +44,9 @@ int getSASpitch() {
   
   if(abs(SASpitch) - joysticksDeadbandPitch < 0)
     SASpitch = 0;
+
+  //pitch's the wrong way, of course
+  SASpitch = SASpitch * -1;
     
   if (!digitalRead(buttonSASunprecise))
     return SASpitch / 10;
@@ -83,6 +86,9 @@ int getRCSx() {
   
   if(abs(RCSx) - joysticksDeadbandX < 0)
     RCSx = 0;
+
+  //x's the wrong way?
+  RCSx = RCSx * -1;
     
   if (!digitalRead(buttonRCSunprecise))
     return RCSx / 10;
@@ -111,6 +117,9 @@ int getRCSz() {
   
   if(abs(RCSz) - joysticksDeadbandZ < 0)
     RCSz = 0;
+
+  //z's the wrong way, forward is negative?
+  RCSz = RCSz * -1;
     
   if (!digitalRead(buttonRCSunprecise))
     return RCSz / 10;
