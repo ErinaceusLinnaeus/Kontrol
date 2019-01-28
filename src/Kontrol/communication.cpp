@@ -1,9 +1,9 @@
 /* (C)2019 Benjamin Schmid  
  *  
- *  send.cpp
+ *  communication.cpp
  */
 
-#include "send.h"
+#include "communication.h"
 
 //KerbalSimPit
 #include <KerbalSimpit.h>

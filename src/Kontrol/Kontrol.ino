@@ -58,9 +58,9 @@
 
 //Including my own libraries
 #include "AutoRocket.h"
+#include "communication.h"
 #include "DisplayOperations.h"
 #include "joysticks.h"
-#include "send.h"
 #include "touch.h"
 
 //Create the AutoRocketList. Only one will ever be used.

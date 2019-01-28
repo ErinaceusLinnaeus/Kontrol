@@ -5,7 +5,7 @@
 
 #include "Arduino.h"
 #include "AutoRocket.h"
-#include "send.h"
+#include "communication.h"
 
 
 char* getTodosString(todos action){

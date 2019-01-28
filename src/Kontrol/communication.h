@@ -1,11 +1,11 @@
 /* (C)2019 Benjamin Schmid  
  *  
- *  send.h
- *  Here we send commands to KSP Simpit
+ *  communication.h
+ *  Here we communicate withthe KSP Simpit plugin
  */
 
-#ifndef SEND_H
-#define SEND_H
+#ifndef COMMUNICATION_H
+#define COMMUNICATION_H
 
 #include <stdint.h>
 #include "AutoRocket.h"
