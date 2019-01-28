@@ -47,7 +47,7 @@
   auroli.newNode(setTranslationY, 512, "TranslationY");
   auroli.newNode(setTranslationZ, 512, "TranslationZ");
 
-  Nonworking, so far:
+  Temporarly fixed. Check send.cpp,82:
 
   auroli.newNode(setSAS, sasStability, "Stability");
   auroli.newNode(setSAS, sasManeuver, "Maneuver");
@@ -67,6 +67,7 @@
 #include "DisplayOperations.h"
 #include "send.h"
 #include "joysticks.h"
+#include "touch.h"
 
 //Create the AutoRocketList. Only one will ever be used.
 //Loading or starting a new one will unload the current Script.
@@ -78,80 +79,18 @@ void setup() {
 
   Serial.begin(115200);
 
-  initializePins();
+  initializeJoystickPins();
+  initializeTouchPins();
 //  initializeDisplay();
   initializeSimpit();
-/*
-  auroli.newNode(toggleACG, acgLight, "Light");
-  auroli.newNode(setSAS, sasStability, "Stability");
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  auroli.newNode(toggleACG, acgLight, "Light");
-  auroli.newNode(setSAS, sasManeuver, "Maneuver");
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  auroli.newNode(toggleACG, acgLight, "Light");
-  auroli.newNode(setSAS, sasPrograde, "Prograde");
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  auroli.newNode(toggleACG, acgLight, "Light");
-  auroli.newNode(setSAS, sasRetrograde, "Retrograde");
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  auroli.newNode(toggleACG, acgLight, "Light");
-  auroli.newNode(setSAS, sasNormal, "Normal");
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  auroli.newNode(toggleACG, acgLight, "Light");
-  auroli.newNode(setSAS, sasAntinormal, "Antinormal");
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  auroli.newNode(toggleACG, acgLight, "Light");
-  auroli.newNode(setSAS, sasRadialin, "Radial In");
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  auroli.newNode(toggleACG, acgLight, "Light");
-  auroli.newNode(setSAS, sasRadialout, "Radial Out");
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  auroli.newNode(toggleACG, acgLight, "Light");
-  auroli.newNode(setSAS, sasTarget, "Target");
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");
-  auroli.newNode(toggleACG, acgLight, "Light");
-  auroli.newNode(setSAS, sasAntitarget, "Antitarget");
-  auroli.newNode(waitTenthSeconds, 10, "HICKS!");*/
-}
-
-void checkJoystick() {
-  
-  Serial.println("---");
-  Serial.println("---");
-    
-  Serial.print("pitch : ");
-  Serial.print(analogRead(A0));
-  Serial.print(" -> ");
-  Serial.println(getSASpitch());
-  Serial.print("yaw   : ");
-  Serial.print(analogRead(A1));
-  Serial.print(" -> ");
-  Serial.println(getSASyaw());
-  Serial.print("roll  : ");
-  Serial.print(analogRead(A2));
-  Serial.print(" -> ");
-  Serial.println(getSASroll());
-
-  Serial.print("x     : ");
-  Serial.print(analogRead(A3));
-  Serial.print(" -> ");
-  Serial.println(getRCSx());
-  Serial.print("y     : ");
-  Serial.print(analogRead(A4));
-  Serial.print(" -> ");
-  Serial.println(getRCSy());
-  Serial.print("z     : ");
-  Serial.print(analogRead(A5));
-  Serial.print(" -> ");
-  Serial.println(getRCSz());
-  delay(500);
 }
 
 void loop() {
 
   updateSimpit();
 
-//  checkJoystick();
+//  checkJoysticks();
+  checkTouch();
 
   sendRotation(getSASpitch(), getSASyaw(), getSASroll());
   sendTranslation(getRCSx(), getRCSy(), getRCSz());

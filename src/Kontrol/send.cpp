@@ -79,10 +79,10 @@ void sendSAS(uint32_t sas) {
   else if (sas == sasAntitarget)
     mySASMode = AP_ANTITARGET;
 
-  mySimpit.send(SAS_MODE_MESSAGE,  (unsigned char*) &mySASMode, 1);
-// mySimpit.send(SAS_MODE_MESSAGE, mySASMode);
+  //Temporary bugfix. Plugin seems to listen to the wrong "channel".
+  mySimpit.send(28,  (unsigned char*) &mySASMode, 1);
+// mySimpit.send(SAS_MODE_MESSAGE,  (unsigned char*) &mySASMode, 1);
 /*
-mySimpit.send(SAS_MODE_MESSAGE, mySASMode, 1);
   if (sas == sasStability)
     mySimpit.setSASMode(AP_STABILITYASSIST);
   else if (sas == sasManeuver)

@@ -1,7 +1,9 @@
 #ifndef JOYSTICKS_H
 #define JOYSTICKS_H
 
-void initializePins();
+void initializeJoystickPins();
+
+void checkJoysticks();
 
 int getSASpitch();
 int getSASyaw();

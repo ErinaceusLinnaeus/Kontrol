@@ -33,7 +33,7 @@ int precisionX = 10;
 int precisionY = 10;
 int precisionZ = 10;
 
-void initializePins() {
+void initializeJoystickPins() {
   
   pinMode(buttonSASunprecise, INPUT_PULLUP);
   pinMode(buttonRCSunprecise, INPUT_PULLUP);
@@ -45,6 +45,39 @@ void initializePins() {
   pinMode(potiX, INPUT);
   pinMode(potiY, INPUT);
   pinMode(potiZ, INPUT);
+}
+
+void checkJoysticks() {
+  
+  Serial.println("---");
+  Serial.println("---");
+    
+  Serial.print("pitch : ");
+  Serial.print(analogRead(potiPitch));
+  Serial.print(" -> ");
+  Serial.println(getSASpitch());
+  Serial.print("yaw   : ");
+  Serial.print(analogRead(potiYaw));
+  Serial.print(" -> ");
+  Serial.println(getSASyaw());
+  Serial.print("roll  : ");
+  Serial.print(analogRead(potiRoll));
+  Serial.print(" -> ");
+  Serial.println(getSASroll());
+
+  Serial.print("x     : ");
+  Serial.print(analogRead(potiX));
+  Serial.print(" -> ");
+  Serial.println(getRCSx());
+  Serial.print("y     : ");
+  Serial.print(analogRead(potiY));
+  Serial.print(" -> ");
+  Serial.println(getRCSy());
+  Serial.print("z     : ");
+  Serial.print(analogRead(potiZ));
+  Serial.print(" -> ");
+  Serial.println(getRCSz());
+  delay(500);
 }
 
 //The range is supposed to be -32768, 32767 but it kept jumping to -32768
