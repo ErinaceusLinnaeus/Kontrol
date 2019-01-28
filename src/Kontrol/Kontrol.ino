@@ -1,4 +1,4 @@
-/* (C)2018 Benjamin Schmid
+/* (C)2019 Benjamin Schmid
 
   Kontrol is an Arduino Project to control KSP.
   The hardware includes two 3-axis-joysticks, a keyboard, a 12" HDMI Display, a 10" resistiv touchpanel.

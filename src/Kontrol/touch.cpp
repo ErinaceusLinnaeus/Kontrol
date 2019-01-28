@@ -1,4 +1,7 @@
-
+/* (C)2019 Benjamin Schmid  
+ *  
+ *  touch.cpp
+ */
 
 #include "touch.h"
 #include <arduino.h>

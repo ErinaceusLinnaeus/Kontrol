@@ -1,4 +1,7 @@
-
+/* (C)2019 Benjamin Schmid  
+ *  
+ *  send.cpp
+ */
 
 #include "send.h"
 

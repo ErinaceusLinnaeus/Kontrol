@@ -1,3 +1,9 @@
+/* (C)2019 Benjamin Schmid  
+ *  
+ *  send.h
+ *  Here we send commands to KSP Simpit
+ */
+
 #ifndef SEND_H
 #define SEND_H
 

@@ -1,4 +1,7 @@
-
+/* (C)2019 Benjamin Schmid  
+ *  
+ *  joysticks.cpp
+ */
 
 #include "joysticks.h"
 #include <arduino.h>

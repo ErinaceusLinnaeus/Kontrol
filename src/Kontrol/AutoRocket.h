@@ -1,4 +1,4 @@
-/*  (C)2018 Benjamin Schmid
+/*  (C)2019 Benjamin Schmid
  *   
  *  AutoRocket.h
  *  Definition of classes to create a doubly linked list to perform auto piloting

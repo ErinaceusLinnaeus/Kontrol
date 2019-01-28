@@ -1,7 +1,6 @@
 /*  (C)2018 Benjamin Schmid
  *   
  *  DisplayOperations.cpp
- *  Functions to print things on the TFT Display
  */
 
 //Display

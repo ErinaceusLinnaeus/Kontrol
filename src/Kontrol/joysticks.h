@@ -1,3 +1,9 @@
+/*  (C)2019 Benjamin Schmid
+ *   
+ *  joysticks.h
+ *  Getting data of two joysticks
+ */
+ 
 #ifndef JOYSTICKS_H
 #define JOYSTICKS_H
 
