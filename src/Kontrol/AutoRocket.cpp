@@ -72,6 +72,7 @@ void AutoRocketList::launchList() {
     else if (currAction == toggleACG)
       //Toggle an action group
       sendACG(currValue);
+    else if (currAction == setSAS)
       //Set SAS Mode
       sendSAS(currValue);
     

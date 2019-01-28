@@ -14,10 +14,6 @@
 // communicate using the "Serial" device.
 KerbalSimpit mySimpit(Serial);
 
-rotationMessage myRotation;
-translationMessage myTranslation;
-AutopilotMode mySASMode;
-
 void initializeSimpit() {
       
   // This loop continually attempts to handshake with the plugin.
@@ -61,6 +57,8 @@ void sendACG(uint32_t acg) {
 
 void sendSAS(uint32_t sas) {
 
+  AutopilotMode mySASMode;
+  
   if (sas == sasStability)
     mySASMode = AP_STABILITYASSIST;
   else if (sas == sasManeuver)
@@ -117,6 +115,8 @@ void sendThrottle(int16_t throttle) {
 
 void sendRotation(int16_t pitch, int16_t yaw, int16_t roll) {
 
+  rotationMessage myRotation;
+
   myRotation.pitch = pitch;
   myRotation.yaw = yaw;
   myRotation.roll = roll;
@@ -126,6 +126,8 @@ void sendRotation(int16_t pitch, int16_t yaw, int16_t roll) {
 
 void sendTranslation(int16_t x, int16_t y, int16_t z) {
 
+  translationMessage myTranslation;
+  
   myTranslation.X = x;
   myTranslation.Y = y;
   myTranslation.Z = z;

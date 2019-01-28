@@ -14,6 +14,8 @@
   auroli.goToTheTop();
 
   printList(auroli);
+  
+  auroli.launchList();
 
   auroli.newNode(waitTenthSeconds, 10, "HICKS!");
 
@@ -94,6 +96,4 @@ void loop() {
 
   sendRotation(getSASpitch(), getSASyaw(), getSASroll());
   sendTranslation(getRCSx(), getRCSy(), getRCSz());
-  
-//  auroli.launchList();
 }
