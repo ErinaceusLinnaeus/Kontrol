@@ -6,15 +6,16 @@
 int buttonSASunprecise = 21;
 int buttonRCSunprecise = 20;
 
+//It's not that bad. 327.67 is 1%
 //A variable deadband would be wonderful
 //I'll think about that
-int joysticksDeadbandPitch = 600;
-int joysticksDeadbandYaw = 1700;
-int joysticksDeadbandRoll = 250;
+int joysticksDeadbandPitch = 900;
+int joysticksDeadbandYaw = 1700; //~5.5%
+int joysticksDeadbandRoll = 650;
 
-int joysticksDeadbandX = 400;
+int joysticksDeadbandX = 1000;
 int joysticksDeadbandY = 1000;
-int joysticksDeadbandZ = 300;
+int joysticksDeadbandZ = 650;
 
 int potiSASpitch = A0;
 int potiSASyaw = A1;
@@ -38,9 +39,10 @@ void initializePins() {
   pinMode(potiRCSz, INPUT);
 }
 
+//The range is supposed to be -32768, 32767 but it kept jumping to -32768
 int getSASpitch() {
   
-  int16_t SASpitch = map(analogRead(potiSASpitch), 0, 1023, -32768, 32767);
+  int16_t SASpitch = map(analogRead(potiSASpitch), 0, 1023, -32700, 32700);
   
   if(abs(SASpitch) - joysticksDeadbandPitch < 0)
     SASpitch = 0;
@@ -56,8 +58,8 @@ int getSASpitch() {
 
 int getSASyaw() {
   
-  int16_t SASyaw = map(analogRead(potiSASyaw), 0, 1023, -32768, 32767);
-  
+  int16_t SASyaw = map(analogRead(potiSASyaw), 0, 1023, -32700, 32700);
+    
   if(abs(SASyaw) - joysticksDeadbandYaw < 0)
     SASyaw = 0;
     
@@ -69,7 +71,7 @@ int getSASyaw() {
 
 int getSASroll() {
     
-  int16_t SASroll = map(analogRead(potiSASroll), 0, 1023, -32768, 32767);
+  int16_t SASroll = map(analogRead(potiSASroll), 0, 1023, -32700, 32700);
   
   if(abs(SASroll) - joysticksDeadbandRoll < 0)
     SASroll = 0;
@@ -82,7 +84,7 @@ int getSASroll() {
 
 int getRCSx() {
   
-  int16_t RCSx = map(analogRead(potiRCSx), 0, 1023, -32768, 32767);
+  int16_t RCSx = map(analogRead(potiRCSx), 0, 1023, -32700, 32700);
   
   if(abs(RCSx) - joysticksDeadbandX < 0)
     RCSx = 0;
@@ -99,7 +101,7 @@ int getRCSx() {
 
 int getRCSy() {
   
-  int16_t RCSy = map(analogRead(potiRCSy), 0, 1023, -32768, 32767);
+  int16_t RCSy = map(analogRead(potiRCSy), 0, 1023, -32700, 32700);;
   
   if(abs(RCSy) - joysticksDeadbandY < 0)
     RCSy = 0;
@@ -113,7 +115,7 @@ int getRCSy() {
 
 int getRCSz() {
   
-  int16_t RCSz = map(analogRead(potiRCSz), 0, 1023, -32768, 32767);
+  int16_t RCSz = map(analogRead(potiRCSz), 0, 1023, -32700, 32700);
   
   if(abs(RCSz) - joysticksDeadbandZ < 0)
     RCSz = 0;

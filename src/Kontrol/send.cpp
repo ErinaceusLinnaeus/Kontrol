@@ -57,7 +57,7 @@ void sendACG(uint32_t acg) {
 }
 
 void sendSAS(uint32_t sas) {
-/*
+
   if (sas == sasStability)
     mySASMode = AP_STABILITYASSIST;
   else if (sas == sasManeuver)
@@ -78,11 +78,11 @@ void sendSAS(uint32_t sas) {
     mySASMode = AP_TARGET;
   else if (sas == sasAntitarget)
     mySASMode = AP_ANTITARGET;
-    
-//  mySimpit.send(SAS_MODE_MESSAGE, mySASMode, 1);
-  mySimpit.send(SAS_MODE_MESSAGE, mySASMode);
-*/
 
+  mySimpit.send(SAS_MODE_MESSAGE,  (unsigned char*) &mySASMode, 1);
+// mySimpit.send(SAS_MODE_MESSAGE, mySASMode);
+/*
+mySimpit.send(SAS_MODE_MESSAGE, mySASMode, 1);
   if (sas == sasStability)
     mySimpit.setSASMode(AP_STABILITYASSIST);
   else if (sas == sasManeuver)
@@ -102,7 +102,7 @@ void sendSAS(uint32_t sas) {
   else if (sas == sasTarget)
     mySimpit.setSASMode(AP_TARGET);
   else if (sas == sasAntitarget)
-    mySimpit.setSASMode(AP_ANTITARGET);
+    mySimpit.setSASMode(AP_ANTITARGET);*/
 }
 
 void sendThrottle(int16_t throttle) {
