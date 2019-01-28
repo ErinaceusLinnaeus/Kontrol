@@ -3,17 +3,9 @@
  *  AutoRocket.cpp
  */
 
+#include "Arduino.h"
 #include "AutoRocket.h"
-#include <string.h>
-//to use sprintf - convert integer to char*
-#include <stdio.h>
 #include "send.h"
-
-#if defined(ARDUINO) && ARDUINO >= 100
-  #include "Arduino.h"
-#else
-  #include "WProgram.h"
-#endif
 
 
 char* getTodosString(todos action){

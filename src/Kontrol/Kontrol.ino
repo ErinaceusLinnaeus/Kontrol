@@ -41,13 +41,6 @@
   auroli.newNode(toggleACG, acg10, "10");
   
   auroli.newNode(setThrottle, 80, "Some Throttle!");
-  
-  auroli.newNode(setRotationPitch, 512, "RotationPitch");
-  auroli.newNode(setRotationYaw, 512, "RotationYaw");
-  auroli.newNode(setRotationRoll, 512, "RotationRoll");
-  auroli.newNode(setTranslationX, 512, "TranslationX");
-  auroli.newNode(setTranslationY, 512, "TranslationY");
-  auroli.newNode(setTranslationZ, 512, "TranslationZ");
 
   Temporarly fixed. Check send.cpp,82:
 
@@ -63,12 +56,11 @@
   auroli.newNode(setSAS, sasAntitarget, "Antitarget");
 */
 
-
 //Including my own libraries
 #include "AutoRocket.h"
 #include "DisplayOperations.h"
-#include "send.h"
 #include "joysticks.h"
+#include "send.h"
 #include "touch.h"
 
 //Create the AutoRocketList. Only one will ever be used.
