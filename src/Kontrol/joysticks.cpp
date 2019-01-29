@@ -51,10 +51,7 @@ void initializeJoystickPins() {
 }
 
 void checkJoysticks() {
-  
-  Serial.println("---");
-  Serial.println("---");
-    
+      
   Serial.print("pitch : ");
   Serial.print(analogRead(potiPitch));
   Serial.print(" -> ");
@@ -80,7 +77,6 @@ void checkJoysticks() {
   Serial.print(analogRead(potiZ));
   Serial.print(" -> ");
   Serial.println(getRCSz());
-  delay(500);
 }
 
 //The range is supposed to be -32768, 32767 but it kept jumping to -32768

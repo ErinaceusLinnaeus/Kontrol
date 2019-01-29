@@ -7,10 +7,9 @@
 #ifndef DISPLAYOPERATIONS_H
 #define DISPLAYOPERATIONS_H
 
-void printInt(int i);
-
 void initializeDisplay();
+
 void printBlack();
-void printList(AutoRocketList auroli);
+void printInt(int i);
 
 #endif

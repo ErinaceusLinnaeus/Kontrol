@@ -1,17 +1,20 @@
-/* (C)2019 Benjamin Schmid  
- *  
+/*  (C)2019 Benjamin Schmid
+ *   
  *  touch.h
- *  Getting the touch coordinates
+ *  Simplifying touch screen coordinates
  */
-
+ 
 #ifndef TOUCH_H
 #define TOUCH_H
 
-void initializeTouchPins();
-
 void checkTouch();
 
-int getTouchX();
-int getTouchY();
+int getStoreyX();
+int getStoreyY();
+
+int getTouchZ();
+
+int getPreciseX();
+int getPreciseY();
 
 #endif

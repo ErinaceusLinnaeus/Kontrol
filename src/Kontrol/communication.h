@@ -14,14 +14,14 @@ void initializeSimpit();
 
 void updateSimpit();
 
-void sendACG(uint32_t acg);
+int checkAbortFlag();
+void unsetAbortFlag();
 
-void sendSAS(uint32_t sas);
-
+void sendCommand(uint32_t command, uint32_t value);
 void sendThrottle(int16_t throttle);
-
 void sendRotation(int16_t pitch, int16_t yaw, int16_t roll);
-
 void sendTranslation(int16_t x, int16_t y, int16_t z);
+
+char* checkCommand(uint32_t command, uint32_t value);
 
 #endif

@@ -14,6 +14,12 @@
 // communicate using the "Serial" device.
 KerbalSimpit mySimpit(Serial);
 
+int AbortFlag = 0;
+long AbortDelay = 500;
+long previousAbort = 0;
+long CommDelay = 200;
+long previousComm = 0;
+
 void initializeSimpit() {
       
   // This loop continually attempts to handshake with the plugin.
@@ -35,79 +41,200 @@ void updateSimpit() {
   mySimpit.update();
 }
 
-void sendACG(uint32_t acg) {
-
-  if (acg == acgStage)
-    mySimpit.activateAction(STAGE_ACTION);
-  else if (acg == acgAbort)
-    mySimpit.activateAction(ABORT_ACTION);
-  else if (acg == acgLight)
-    mySimpit.toggleAction(LIGHT_ACTION);
-  else if (acg == acgGear)
-    mySimpit.toggleAction(GEAR_ACTION);
-  else if (acg == acgBrakes)
-    mySimpit.toggleAction(BRAKES_ACTION);
-  else if (acg == acgRCS)
-    mySimpit.toggleAction(RCS_ACTION);
-  else if (acg == acgSAS)
-    mySimpit.toggleAction(SAS_ACTION);
-  else
-    mySimpit.toggleCAG(acg);
+int checkAbortFlag() {
+  if (AbortFlag && ((millis() - previousAbort) > AbortDelay)) {
+    AbortFlag = 0;
+    return 1;
+  }
+  else {
+    previousAbort = millis();
+    AbortFlag = 1;
+    return 0;
+  }
 }
 
-void sendSAS(uint32_t sas) {
+void unsetAbortFlag() {
+  AbortFlag = 0;
+}
 
-  AutopilotMode mySASMode;
-  
-  if (sas == sasStability)
-    mySASMode = AP_STABILITYASSIST;
-  else if (sas == sasManeuver)
-    mySASMode = AP_MANEUVER;
-  else if (sas == sasPrograde)
-    mySASMode = AP_PROGRADE;
-  else if (sas == sasRetrograde)
-    mySASMode = AP_RETROGRADE;
-  else if (sas == sasNormal)
-    mySASMode = AP_NORMAL;
-  else if (sas == sasAntinormal)
-    mySASMode = AP_ANTINORMAL;
-  else if (sas == sasRadialin)
-    mySASMode = AP_RADIALIN;
-  else if (sas == sasRadialout)
-    mySASMode = AP_RADIALOUT;
-  else if (sas == sasTarget)
-    mySASMode = AP_TARGET;
-  else if (sas == sasAntitarget)
-    mySASMode = AP_ANTITARGET;
+void sendCommand(uint32_t command, uint32_t value) {
 
-  //Temporary bugfix. Plugin seems to listen to the wrong "channel".
-  mySimpit.send(28,  (unsigned char*) &mySASMode, 1);
-// mySimpit.send(SAS_MODE_MESSAGE,  (unsigned char*) &mySASMode, 1);
-/*
-  if (sas == sasStability)
-    mySimpit.setSASMode(AP_STABILITYASSIST);
-  else if (sas == sasManeuver)
-    mySimpit.setSASMode(AP_MANEUVER);
-  else if (sas == sasPrograde)
-    mySimpit.setSASMode(AP_PROGRADE);
-  else if (sas == sasRetrograde)
-    mySimpit.setSASMode(AP_RETROGRADE);
-  else if (sas == sasNormal)
-    mySimpit.setSASMode(AP_NORMAL);
-  else if (sas == sasAntinormal)
-    mySimpit.setSASMode(AP_ANTINORMAL);
-  else if (sas == sasRadialin)
-    mySimpit.setSASMode(AP_RADIALIN);
-  else if (sas == sasRadialout)
-    mySimpit.setSASMode(AP_RADIALOUT);
-  else if (sas == sasTarget)
-    mySimpit.setSASMode(AP_TARGET);
-  else if (sas == sasAntitarget)
-    mySimpit.setSASMode(AP_ANTITARGET);*/
+  if ((millis() - previousComm) > CommDelay) {
+
+    previousComm = millis();
+    
+    if (command == NIX) {
+      NULL;
+    }
+    else if (command == acgStage) {
+      unsetAbortFlag();
+      mySimpit.activateAction(STAGE_ACTION);
+    }
+    else if (command == acgAbort) {
+      if (checkAbortFlag() || value == 0) {
+        mySimpit.activateAction(ABORT_ACTION);
+      }
+      else {
+        NULL;
+      }
+    }
+    else if (command == acgLight) {
+      unsetAbortFlag();
+      if (value == 0)
+        mySimpit.deactivateAction(LIGHT_ACTION);
+      else if (value == 1)
+        mySimpit.toggleAction(LIGHT_ACTION);
+      else if (value == 2)
+        mySimpit.activateAction(LIGHT_ACTION);
+    }
+    else if (command == acgGear) {
+      unsetAbortFlag();
+      if (value == 0)
+        mySimpit.deactivateAction(GEAR_ACTION);
+      else if (value == 1)
+        mySimpit.toggleAction(GEAR_ACTION);
+      else if (value == 2)
+        mySimpit.activateAction(GEAR_ACTION);
+    }
+    else if (command == acgBrakes) {
+      unsetAbortFlag();
+      if (value == 0)
+        mySimpit.deactivateAction(BRAKES_ACTION);
+      else if (value == 1)
+        mySimpit.toggleAction(BRAKES_ACTION);
+      else if (value == 2)
+        mySimpit.activateAction(BRAKES_ACTION);
+    }
+    else if (command == acgRCS) {
+      unsetAbortFlag();
+      if (value == 0)
+        mySimpit.deactivateAction(RCS_ACTION);
+      else if (value == 1)
+        mySimpit.toggleAction(RCS_ACTION);
+      else if (value == 2)
+        mySimpit.activateAction(RCS_ACTION);
+    }
+    else if (command == acgSAS) {
+      unsetAbortFlag();
+      if (value == 0)
+        mySimpit.deactivateAction(SAS_ACTION);
+      else if (value == 1)
+        mySimpit.toggleAction(SAS_ACTION);
+      else if (value == 2)
+        mySimpit.activateAction(SAS_ACTION);
+    }
+    else if (command == acg1 || command == acg2 || command == acg3 || command == acg4 || command == acg5 ||
+             command == acg6 || command == acg7 || command == acg8 || command == acg9 || command == acg10){
+      unsetAbortFlag();
+      if (value == 0)
+        mySimpit.deactivateCAG(command);
+      else if (value == 1)
+        mySimpit.toggleCAG(command);
+      else if (value == 2)
+        mySimpit.activateCAG(command);
+    }
+    else if (command == sasStability) {
+      unsetAbortFlag();
+      mySimpit.activateAction(SAS_ACTION);
+      delay(50);
+      AutopilotMode mySASMode = AP_STABILITYASSIST;
+      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
+//      mySimpit.setSASMode(AP_STABILITYASSIST);
+    }
+    else if (command == sasManeuver) {
+      unsetAbortFlag();
+      mySimpit.activateAction(SAS_ACTION);
+      delay(50);
+      AutopilotMode mySASMode = AP_MANEUVER;
+      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
+//      mySimpit.setSASMode(AP_MANEUVER);
+    }
+    else if (command == sasPrograde) {
+      unsetAbortFlag();
+      mySimpit.activateAction(SAS_ACTION);
+      delay(50);
+      AutopilotMode mySASMode = AP_PROGRADE;
+      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
+//      mySimpit.setSASMode(AP_PROGRADE);
+    }
+    else if (command == sasRetrograde) {
+      unsetAbortFlag();
+      mySimpit.activateAction(SAS_ACTION);
+      delay(50);
+      AutopilotMode mySASMode = AP_RETROGRADE;
+      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
+//      mySimpit.setSASMode(AP_RETROGRADE);
+    }
+    else if (command == sasNormal) {
+      unsetAbortFlag();
+      mySimpit.activateAction(SAS_ACTION);
+      delay(50);
+      AutopilotMode mySASMode = AP_NORMAL;
+      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
+//      mySimpit.setSASMode(AP_NORMAL);
+    }
+    else if (command == sasAntinormal) {
+      unsetAbortFlag();
+      mySimpit.activateAction(SAS_ACTION);
+      delay(50);
+      AutopilotMode mySASMode = AP_ANTINORMAL;
+      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
+//      mySimpit.setSASMode(AP_ANTINORMAL);
+    }
+    else if (command == sasRadialin) {
+      unsetAbortFlag();
+      mySimpit.activateAction(SAS_ACTION);
+      delay(50);
+      AutopilotMode mySASMode = AP_RADIALIN;
+      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
+//      mySimpit.setSASMode(AP_RADIALIN);
+    }
+    else if (command == sasRadialout) {
+      unsetAbortFlag();
+      mySimpit.activateAction(SAS_ACTION);
+      delay(50);
+      AutopilotMode mySASMode = AP_RADIALOUT;
+      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
+//      mySimpit.setSASMode(AP_RADIALOUT);
+    }
+    else if (command == sasTarget) {
+      unsetAbortFlag();
+      mySimpit.activateAction(SAS_ACTION);
+      delay(50);
+      AutopilotMode mySASMode = AP_TARGET;
+      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
+//      mySimpit.setSASMode(AP_TARGET);
+    }
+    else if (command == sasAntitarget) {
+      unsetAbortFlag();
+      mySimpit.activateAction(SAS_ACTION);
+      delay(50);
+      AutopilotMode mySASMode = AP_ANTITARGET;
+      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
+//      mySimpit.setSASMode(AP_ANTITARGET);
+    }
+    //Temporary bugfix. Plugin seems to listen to the wrong "channel".
+  //  AutopilotMode mySASMode;
+  // mySimpit.send(28, (unsigned char*) &mySASMode, 1);
+  // mySimpit.send(SAS_MODE_MESSAGE, (unsigned char*) &mySASMode, 1);
+    else if (command == setThrottle) {
+      unsetAbortFlag();
+      sendThrottle(value);
+    }
+  }
 }
 
 void sendThrottle(int16_t throttle) {
 
+  //Negative does work but let's be solid, because...
+  if (throttle < 0) {
+    throttle = 0;
+  }
+  //...above 100 leads to 0 throttle and maybe someday negative throttle will be wonky
+  else if (throttle > 100) {
+    throttle = 100;
+  }
+  
   //I use %, but KSP expects 0 -> 32767
   throttle = throttle * 327,67;
   mySimpit.send(THROTTLE_MESSAGE, (unsigned char*) &throttle, 2);
@@ -133,4 +260,131 @@ void sendTranslation(int16_t x, int16_t y, int16_t z) {
   myTranslation.Z = z;
   myTranslation.mask = 7;
   mySimpit.send(TRANSLATION_MESSAGE, myTranslation);
+}
+
+
+char* checkCommand(uint32_t command, uint32_t value) {
+
+  if ((millis() - previousComm) > CommDelay) {
+
+    previousComm = millis();
+    
+    if (command == NIX) {
+      return "NIX";
+    }
+    else if (command == acgStage) {
+      unsetAbortFlag();
+      return "activate Stage";
+    }
+    else if (command == acgAbort) {
+      if (checkAbortFlag() || value == 0) {
+        return "activate Abort";
+      }
+      else {
+        return "NIX";
+      }
+    }
+    else if (command == acgLight) {
+      unsetAbortFlag();
+      if (value == 0)
+        return "deactivate Light";
+      else if (value == 1)
+        return "toggle Light";
+      else if (value == 2)
+        return "activate Light";
+    }
+    else if (command == acgGear) {
+      unsetAbortFlag();
+      if (value == 0)
+        return "deactivate Gear";
+      else if (value == 1)
+        return "toggle Gear";
+      else if (value == 2)
+        return "activate Gear";
+    }
+    else if (command == acgBrakes) {
+      unsetAbortFlag();
+      if (value == 0)
+        return "deactivate Brakes";
+      else if (value == 1)
+        return "toggle Brakes";
+      else if (value == 2)
+        return "activate Brakes";
+    }
+    else if (command == acgRCS) {
+      unsetAbortFlag();
+      if (value == 0)
+        return "deactivate RCS";
+      else if (value == 1)
+        return "toggle RCS";
+      else if (value == 2)
+        return "activate RCS";
+    }
+    else if (command == acgSAS) {
+      unsetAbortFlag();
+      if (value == 0)
+        return "deactivate SAS";
+      else if (value == 1)
+        return "toggle SAS";
+      else if (value == 2)
+        return "activate SAS";
+    }
+    else if (command == acg1 || command == acg2 || command == acg3 || command == acg4 || command == acg5 ||
+             command == acg6 || command == acg7 || command == acg8 || command == acg9 || command == acg10){
+      unsetAbortFlag();
+      if (value == 0)
+        return "deactivate ACG";
+      else if (value == 1)
+        return "toggle ACG";
+      else if (value == 2)
+        return "activate ACG";
+    }
+    else if (command == sasStability) {
+      unsetAbortFlag();
+      return "activate Stability";
+    }
+    else if (command == sasManeuver) {
+      unsetAbortFlag();
+      return "activate Maneuver";
+    }
+    else if (command == sasPrograde) {
+      unsetAbortFlag();
+      return "activate Prograde";
+    }
+    else if (command == sasRetrograde) {
+      unsetAbortFlag();
+      return "activate Retrograde";
+    }
+    else if (command == sasNormal) {
+      unsetAbortFlag();
+      return "activate Normal";
+    }
+    else if (command == sasAntinormal) {
+      unsetAbortFlag();
+      return "activate Antinormal";
+    }
+    else if (command == sasRadialin) {
+      unsetAbortFlag();
+      return "activate Radialin";
+    }
+    else if (command == sasRadialout) {
+      unsetAbortFlag();
+      return "activate Radialout";
+    }
+    else if (command == sasTarget) {
+      unsetAbortFlag();
+      return "activate Target";
+    }
+    else if (command == sasAntitarget) {
+      unsetAbortFlag();
+      return "activate Antitarget";
+    }
+    else if (command == setThrottle) {
+      unsetAbortFlag();
+      return "throttle";
+    }
+  }
+  else {
+    return "debounce";
+  }
 }

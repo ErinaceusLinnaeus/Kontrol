@@ -9,58 +9,61 @@
 
 #include <stdint.h>
 
-/*
- * Types of things a node can do:
- * Wait some time.
- * Wait until a distance to a target in centimeter is reached.
- * Wait until a given radar altitude in meter.
- * Wait until a given altitude in meter.
- * Wait until a given altitude in kilometer.
- * Change the throttle.
- * Stage.
- * Toggle an action group.
- * Change the attitude.
- * Change the translation.
- * Exit, being the last node.
- */
 /*A class to program for autofly mode
  * First a name you can enter
  * And a description you can enter
  * Let the rocket do something or exit:
- *  Value is either... (max. 4.294.967.295)
- *    ...the time to wait[tenth-of-a-seconds] - 4971 d - 06:28:15 ~> 13 years 6 months
- *      xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
- *    ...the distance (to a target) [centimeter]
- *      xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
- *    ...the (radar)altitude [meter]
- *      xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
- *    ...the altitude [meter]
- *      xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
- *    ...the altitude [kilometer]
- *      xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
- *    ...throttle [%]
- *      00000000 00000000 00000000 0xxxxxxx
- *    stage
- *      11111111 11111111 11111111 11111111
- *    actiongroup, also SAS, RCS, Brakes, Gear, etc.
- *      00000000 00000000 00000000 0xxxxxxx
- *    exit (exit point at last node)
- *      00000000 00000000 00000000 00000000
+ *  Command             |   Value
+ *    NIX               |   any
+ *    acg1              |   0:deactivate, 1:toggle, 2:activate
+ *    acg2              |   0:deactivate, 1:toggle, 2:activate
+ *    acg3              |   0:deactivate, 1:toggle, 2:activate
+ *    acg4              |   0:deactivate, 1:toggle, 2:activate
+ *    acg5              |   0:deactivate, 1:toggle, 2:activate
+ *    acg6              |   0:deactivate, 1:toggle, 2:activate
+ *    acg7              |   0:deactivate, 1:toggle, 2:activate
+ *    acg8              |   0:deactivate, 1:toggle, 2:activate
+ *    acg9              |   0:deactivate, 1:toggle, 2:activate
+ *    acg10             |   0:deactivate, 1:toggle, 2:activate
+ *    acgStage          |   any
+ *    acgAbort          |   any, 0 will ignore safety
+ *    acgLight          |   0:deactivate, 1:toggle, 2:activate
+ *    acgGear           |   0:deactivate, 1:toggle, 2:activate
+ *    acgBrakes         |   0:deactivate, 1:toggle, 2:activate
+ *    acgRCS            |   0:deactivate, 1:toggle, 2:activate
+ *    acgSAS            |   0:deactivate, 1:toggle, 2:activate
+ *    sasStability      |   any, activates SAS
+ *    sasManeuver       |   any, activates SAS
+ *    sasPrograde       |   any, activates SAS
+ *    sasRetrograde     |   any, activates SAS
+ *    sasNormal         |   any, activates SAS
+ *    sasAntinormal     |   any, activates SAS
+ *    sasRadialin       |   any, activates SAS
+ *    sasRadialout      |   any, activates SAS
+ *    sasTarget         |   any, activates SAS
+ *    sasAntitarget     |   any, activates SAS
+ *    setThrottle       |   0...100
+ *    waitForDistanceCM |   0...4.294.967.295
+ *    waitForDistanceCM |   0...4.294.967.295
+ *    waitForRAltM      |   0...4.294.967.295
+ *    waitForAltM       |   0...4.294.967.295
+ *    waitForAltKM      |   0...4.294.967.295
+ *    theExitNode       |   any
+ *    
+ *    auroli.setFilename("Go Rocket, go.");
+ *    auroli.setDescription("Just playing around...");
+ *    auroli.newNode(command, value, "info");
+ *    auroli.delNode();
+ *    auroli.goToTheTop();
  */
- 
-enum todos {waitTenthSeconds, waitForDistanceCM, waitForRAltM, waitForAltM, waitForAltKM, setThrottle, toggleACG, setSAS, theExitNode};
 
-enum acgIdentifier {acgStage, acg1, acg2, acg3, acg4, acg5, acg6, acg7, acg8, acg9, acg10, acgAbort, acgLight, acgGear, acgBrakes, acgRCS, acgSAS};
-
-enum sasMode {sasStability, sasManeuver, sasPrograde, sasRetrograde, sasNormal, sasAntinormal, sasRadialin, sasRadialout, sasTarget, sasAntitarget};
-
-char* getTodosString(todos action);
+enum command {NIX, acg1, acg2, acg3, acg4, acg5, acg6, acg7, acg8, acg9, acg10, acgStage, acgAbort, acgLight, acgGear, acgBrakes, acgRCS, acgSAS, sasStability, sasManeuver, sasPrograde, sasRetrograde, sasNormal, sasAntinormal, sasRadialin, sasRadialout, sasTarget, sasAntitarget, setThrottle, waitTenthSeconds, waitForDistanceCM, waitForRAltM, waitForAltM, waitForAltKM, theExitNode};
 
 class AutoRocketNode {
   
   private:
     //The Data
-    todos action;
+    command action;
     uint32_t value;
     char information[31];
 
@@ -71,15 +74,15 @@ class AutoRocketNode {
     
     //Constructors
     AutoRocketNode();
-    AutoRocketNode(todos action, uint32_t value, char information[31]);
+    AutoRocketNode(command action, uint32_t value, char information[31]);
 
     //Getting Data
-    todos getAction();
+    command getAction();
     uint32_t getValue();
     char* getInformation();
 
     //Manipulating Data
-    void setAction(AutoRocketNode *node, todos action);
+    void setAction(AutoRocketNode *node, command action);
     void setValue(AutoRocketNode *node, uint32_t value);
     void setInformation(AutoRocketNode *node, char information[31]);
 };
@@ -112,7 +115,7 @@ class AutoRocketList {
     void setDescription(char description[255]);
 
     //Manage Nodes
-    void newNode(todos action, uint32_t value, char information[255]);
+    void newNode(command action, uint32_t value, char information[255]);
     void delNode();
 
     //Navigating the nodes

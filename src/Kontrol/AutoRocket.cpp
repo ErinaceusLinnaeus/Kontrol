@@ -7,33 +7,6 @@
 #include "AutoRocket.h"
 #include "communication.h"
 
-
-char* getTodosString(todos action){
-  
-  switch(action){
-      case waitTenthSeconds:
-       return "waitTenthSeconds";
-      case waitForDistanceCM:
-       return "waitForDistanceCM";
-      case waitForRAltM:
-       return "waitForRAltM";
-      case waitForAltM:
-       return "waitForAltM";
-      case waitForAltKM:
-       return "waitForAltKM";
-      case setThrottle:
-       return "setThrottle";
-      case toggleACG:
-       return "toggleACG";
-      case setSAS:
-       return "setSAS";
-      case theExitNode:
-       return "theExitNode";
-      default:
-       return "outOfRange";
-    }
-}
-
 void AutoRocketList::launchList() {
 
   AutoRocketNode* currNode = this->firstNode;
@@ -61,12 +34,8 @@ void AutoRocketList::launchList() {
     else if (currAction == setThrottle)
       //Set throttle
       sendThrottle(currValue);
-    else if (currAction == toggleACG)
-      //Toggle an action group
-      sendACG(currValue);
-    else if (currAction == setSAS)
-      //Set SAS Mode
-      sendSAS(currValue);
+    else
+      sendCommand(currAction, currValue);
     
     currNode = currNode->nextNode;
   }
@@ -107,14 +76,14 @@ AutoRocketNode::AutoRocketNode() {
 }
 
 //Constructing a Node
-AutoRocketNode::AutoRocketNode(todos action, uint32_t value, char information[31]) {
+AutoRocketNode::AutoRocketNode(command action, uint32_t value, char information[31]) {
 
   this->action = action;
   this->value = value;
   strcpy(this->information, information);
 }
 
-void AutoRocketList::newNode(todos action, uint32_t value, char information[31]) {
+void AutoRocketList::newNode(command action, uint32_t value, char information[31]) {
 
   AutoRocketNode* temp;
   temp = new AutoRocketNode();
@@ -144,7 +113,7 @@ void AutoRocketList::delNode() {
 }
 
 
-void AutoRocketNode::setAction(AutoRocketNode *node, todos action){
+void AutoRocketNode::setAction(AutoRocketNode *node, command action){
 
   this->action = action;
 }
@@ -163,7 +132,7 @@ void AutoRocketNode::setInformation(AutoRocketNode *node, char information[31]) 
 }
 
 
-todos AutoRocketNode::getAction() {
+command AutoRocketNode::getAction() {
   
   return this->action;
 }
