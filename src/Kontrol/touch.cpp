@@ -34,7 +34,6 @@ int getStoreyX() {
 
   //Monitor is 1366x768
   p = ts.getPoint();
-  //Values while idle: x:-176, y:1112, z:0
   x = map(p.x, 150, 830, 0, 800);
 
   //Getting the ccoordinates by the 100's
@@ -51,8 +50,7 @@ int getStoreyY() {
   
   //Monitor is 1366x768
   p = ts.getPoint();
-  //Values while idle: x:-176, y:1112, z:0
-  y = map(p.y, 150, 935, 0, 1100);
+  y = map(p.y, 150, 935, 0, 1000);
 
   //Getting the ccoordinates by the 100's
   y = y / 100 + 1;
@@ -81,5 +79,5 @@ int getPreciseX() {
 int getPreciseY() {
   
   p = ts.getPoint();
-  return y = map(p.y, 150, 935, 0, 1100);
+  return y = map(p.y, 150, 935, 0, 1000);
 }

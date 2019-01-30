@@ -23,7 +23,7 @@
 AutoRocketList auroli;
 
 //This is needed by an array to determine what command to send when touching a specific field
-command TouchScreenField[9][12] = {NIX};
+command TouchScreenField[9][11] = {NIX};
 //The actual function is at the bottom, because it's really ugly
 void fillTouchScreenField();
 
@@ -93,10 +93,9 @@ void fillTouchScreenField() {
   TouchScreenField[1][5] = acgStage;
   TouchScreenField[1][6] = acgStage;
   TouchScreenField[1][7] = acgStage;
-  TouchScreenField[1][8] = acgSAS;
-  TouchScreenField[1][9] = acgSAS;
+  TouchScreenField[1][8] = acgStage;
+  TouchScreenField[1][9] = acgBrakes;
   TouchScreenField[1][10] = acgAbort;
-  TouchScreenField[1][11] = acgAbort;
   
   TouchScreenField[2][1] = NIX;
   TouchScreenField[2][2] = setThrottle;
@@ -106,9 +105,8 @@ void fillTouchScreenField() {
   TouchScreenField[2][6] = NIX;
   TouchScreenField[2][7] = NIX;
   TouchScreenField[2][8] = NIX;
-  TouchScreenField[2][9] = NIX;
-  TouchScreenField[2][10] = sasTarget;
-  TouchScreenField[2][11] = sasAntitarget;
+  TouchScreenField[2][9] = acgLight;
+  TouchScreenField[2][10] = acgGear;
   
   TouchScreenField[3][1] = NIX;
   TouchScreenField[3][2] = setThrottle;
@@ -118,9 +116,8 @@ void fillTouchScreenField() {
   TouchScreenField[3][6] = NIX;
   TouchScreenField[3][7] = NIX;
   TouchScreenField[3][8] = NIX;
-  TouchScreenField[3][9] = NIX;
-  TouchScreenField[3][10] = sasRadialin;
-  TouchScreenField[3][11] = sasRadialout;
+  TouchScreenField[3][9] = sasTarget;
+  TouchScreenField[3][10] = sasAntitarget;
   
   TouchScreenField[4][1] = NIX;
   TouchScreenField[4][2] = setThrottle;
@@ -130,9 +127,8 @@ void fillTouchScreenField() {
   TouchScreenField[4][6] = NIX;
   TouchScreenField[4][7] = NIX;
   TouchScreenField[4][8] = NIX;
-  TouchScreenField[4][9] = NIX;
-  TouchScreenField[4][10] = sasNormal;
-  TouchScreenField[4][11] = sasAntinormal;
+  TouchScreenField[4][9] = sasRadialin;
+  TouchScreenField[4][10] = sasRadialout;
   
   TouchScreenField[5][1] = NIX;
   TouchScreenField[5][2] = setThrottle;
@@ -142,9 +138,8 @@ void fillTouchScreenField() {
   TouchScreenField[5][6] = NIX;
   TouchScreenField[5][7] = NIX;
   TouchScreenField[5][8] = NIX;
-  TouchScreenField[5][9] = NIX;
-  TouchScreenField[5][10] = sasPrograde;
-  TouchScreenField[5][11] = sasRetrograde;
+  TouchScreenField[5][9] = sasNormal;
+  TouchScreenField[5][10] = sasAntinormal;
  
   TouchScreenField[6][1] = NIX;
   TouchScreenField[6][2] = setThrottle;
@@ -154,9 +149,8 @@ void fillTouchScreenField() {
   TouchScreenField[6][6] = NIX;
   TouchScreenField[6][7] = NIX;
   TouchScreenField[6][8] = NIX;
-  TouchScreenField[6][9] = NIX;
-  TouchScreenField[6][10] = sasStability;
-  TouchScreenField[6][11] = sasManeuver;
+  TouchScreenField[6][9] = sasPrograde;
+  TouchScreenField[6][10] = sasRetrograde;
   
   TouchScreenField[7][1] = NIX;
   TouchScreenField[7][2] = setThrottle;
@@ -166,9 +160,8 @@ void fillTouchScreenField() {
   TouchScreenField[7][6] = NIX;
   TouchScreenField[7][7] = NIX;
   TouchScreenField[7][8] = NIX;
-  TouchScreenField[7][9] = NIX;
-  TouchScreenField[7][10] = acgGear;
-  TouchScreenField[7][11] = acgBrakes;
+  TouchScreenField[7][9] = sasStability;
+  TouchScreenField[7][10] = sasManeuver;
 
   TouchScreenField[8][1] = acg1;
   TouchScreenField[8][2] = acg2;
@@ -180,5 +173,4 @@ void fillTouchScreenField() {
   TouchScreenField[8][8] = acg8;
   TouchScreenField[8][9] = acg9;
   TouchScreenField[8][10] = acg10;
-  TouchScreenField[8][11] = acgLight;
 }
