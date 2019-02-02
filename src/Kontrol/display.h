@@ -16,7 +16,7 @@ class Display {
   public:
     //The actual display
 //    TFT_HX8357_Due tft = TFT_HX8357_Due();
-    void initialize();
+    Display();
 
     void printBlack();
     void printInt(int i);

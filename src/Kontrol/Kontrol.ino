@@ -11,6 +11,7 @@
 
 //Including my own libraries
 #include "autorocketlist.h"
+#include "axis.h"
 #include "communication.h"
 #include "display.h"
 #include "joysticks.h"
@@ -27,6 +28,14 @@ TouchPanel touchy;
 //Create a display object
 Display hdmi;
 
+//Create the joystick axis
+Axis pitch("pitch", A0, 21, 900, 3, -1);
+Axis yaw("yaw", A1, 21, 1700, 3, 1);
+Axis roll("roll", A2, 21, 650, 10, 1);
+Axis x("x", A3, 20, 1000, 10, -1);
+Axis y("y", A4, 20, 1000, 10, 1);
+Axis z("z", A5, 20, 650, 10, -1);
+
 //This is needed by an array to determine what command to send when touching a specific field
 command commandMatrix[9][11] = {NIX};
 //The actual function is at the bottom, because it's really ugly
@@ -38,8 +47,7 @@ void setup() {
   Serial.begin(115200);
   fillcommandMatrix();
   
-  initializeJoystickPins();
-  hdmi.initialize();
+//  initializeJoystickPins();
 
   if (DEBUG == 0)
     initializeSimpit();
@@ -49,8 +57,12 @@ void loop() {
   
   if (DEBUG == 0) {
     updateSimpit();
-    sendRotation(getSASpitch(), getSASyaw(), getSASroll());
-    sendTranslation(getRCSx(), getRCSy(), getRCSz());
+    sendRotation(pitch.getValue(), yaw.getValue(), roll.getValue());
+    sendTranslation(x.getValue(), y.getValue(), z.getValue());
+    
+//    sendRotation(getSASpitch(), getSASyaw(), getSASroll());
+//    sendTranslation(getRCSx(), getRCSy(), getRCSz());
+
     // Getting the right commd in the matrix
     command tmp = commandMatrix[touchy.getStoreyX()][touchy.getStoreyY()];
 
@@ -67,7 +79,15 @@ void loop() {
     }
   }
   else if (DEBUG == 1) {
-    checkJoysticks();
+    pitch.check();
+    yaw.check();
+    roll.check();
+    x.check();
+    y.check();
+    z.check();
+    
+//    checkJoysticks();
+
     touchy.check();
     checkcommandMatrix();
     

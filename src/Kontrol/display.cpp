@@ -5,7 +5,7 @@
 
 #include "display.h"
 
-void Display::initialize(){
+Display::Display(){
 /*  
   //Setup the LCD
   tft.begin();

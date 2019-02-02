@@ -7,7 +7,6 @@
 #ifndef COMMUNICATION_H
 #define COMMUNICATION_H
 
-#include <stdint.h>
 #include "autorocketlist.h"
 
 void initializeSimpit();
