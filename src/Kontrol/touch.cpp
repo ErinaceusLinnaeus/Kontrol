@@ -7,16 +7,17 @@
 
 void TouchPanel::check() {
 
-  Serial.print("x : ");
+  Serial.print("x, y, z : ");
   Serial.print(this->getPreciseX());
-  Serial.print(" -> ");
-  Serial.println(this->getStoreyX());
-  Serial.print("y     : ");
+  Serial.print(" , ");
   Serial.print(this->getPreciseY());
-  Serial.print(" -> ");
+  Serial.print(" , ");
+  Serial.print(this->getTouchZ());
+  Serial.print("y : ");
+  Serial.print(" ->  (x/y) : (");
+  Serial.print(this->getStoreyX());
+  Serial.print("/");
   Serial.println(this->getStoreyY());
-  Serial.print("z : ");
-  Serial.println(this->getTouchZ());
 }
 
 int TouchPanel::getStoreyX() {

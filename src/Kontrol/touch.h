@@ -14,10 +14,10 @@ class TouchPanel {
 
   private:
     //Pins connected to the touchscreen
-    int YP = A10;
-    int XM = A11;
-    int YM = 14;
-    int XP = 15;
+    const int YP = A10;
+    const int XM = A11;
+    const int YM = 14;
+    const int XP = 15;
     
     //A 3 dimensional point...
     TSPoint p;

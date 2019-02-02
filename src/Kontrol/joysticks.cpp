@@ -6,35 +6,35 @@
 #include "joysticks.h"
 #include <arduino.h>
 
-int buttonSASunprecise = 21;
-int buttonRCSunprecise = 20;
+const int buttonSASunprecise = 21;
+const int buttonRCSunprecise = 20;
 
 //It's not that bad. 327.67 is 1%
 //A variable deadband would be wonderful
 //I'll think about that
-int DeadbandPitch = 900;
-int DeadbandYaw = 1700; //~5.5%
-int DeadbandRoll = 650;
+const int DeadbandPitch = 900;
+const int DeadbandYaw = 1700; //~5.5%
+const int DeadbandRoll = 650;
 
-int DeadbandX = 1000;
-int DeadbandY = 1000;
-int DeadbandZ = 650;
+const int DeadbandX = 1000;
+const int DeadbandY = 1000;
+const int DeadbandZ = 650;
 
-int potiPitch = A0;
-int potiYaw = A1;
-int potiRoll = A2;
+const int potiPitch = A0;
+const int potiYaw = A1;
+const int potiRoll = A2;
 
-int potiX = A3;
-int potiY = A4;
-int potiZ = A5;
+const int potiX = A3;
+const int potiY = A4;
+const int potiZ = A5;
 
-int precisionPitch = 3;
-int precisionYaw = 3;
-int precisionRoll = 10;
+const int precisionPitch = 3;
+const int precisionYaw = 3;
+const int precisionRoll = 10;
 
-int precisionX = 10;
-int precisionY = 10;
-int precisionZ = 10;
+const int precisionX = 10;
+const int precisionY = 10;
+const int precisionZ = 10;
 
 void initializeJoystickPins() {
   

@@ -15,9 +15,9 @@
 KerbalSimpit mySimpit(Serial);
 
 int AbortFlag = 0;
-long AbortDelay = 500;
+const long AbortDelay = 500;
 long previousAbort = 0;
-long CommDelay = 200;
+const long CommDelay = 200;
 long previousComm = 0;
 
 void initializeSimpit() {
@@ -226,11 +226,11 @@ void sendCommand(uint32_t command, uint32_t value) {
 
 void sendThrottle(int16_t throttle) {
 
+  //to be sure to stay in integers range later
+  throttle = constrain(throttle, 0, 100);
+  
   //I use %, but KSP expects 0 -> 32767
   throttle = throttle * 327,67;
-  
-  //to be sure to stay in integers range
-  throttle = constrain(throttle, 0, 32767);
   
   mySimpit.send(THROTTLE_MESSAGE, (unsigned char*) &throttle, 2);
 }
