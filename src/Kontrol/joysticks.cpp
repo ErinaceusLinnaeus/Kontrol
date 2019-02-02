@@ -82,7 +82,9 @@ void checkJoysticks() {
 //The range is supposed to be -32768, 32767 but it kept jumping to -32768
 int getSASpitch() {
   
-  int16_t SASpitch = map(analogRead(potiPitch), 0, 1023, -32700, 32700);
+  int16_t SASpitch = map(analogRead(potiPitch), 0, 1023, -32768, 32767);
+  //to be sure to stay in integers range
+  SASpitch = constrain(SASpitch, -32768, 32767);
   
   if(abs(SASpitch) - DeadbandPitch < 0)
     SASpitch = 0;
@@ -98,7 +100,9 @@ int getSASpitch() {
 
 int getSASyaw() {
   
-  int16_t SASyaw = map(analogRead(potiYaw), 0, 1023, -32700, 32700);
+  int16_t SASyaw = map(analogRead(potiYaw), 0, 1023, -32768, 32767);
+  //to be sure to stay in integers range
+  SASpitch = constrain(potiYaw, -32768, 32767);
     
   if(abs(SASyaw) - DeadbandYaw < 0)
     SASyaw = 0;
@@ -111,7 +115,9 @@ int getSASyaw() {
 
 int getSASroll() {
     
-  int16_t SASroll = map(analogRead(potiRoll), 0, 1023, -32700, 32700);
+  int16_t SASroll = map(analogRead(potiRoll), 0, 1023, -32768, 32767);
+  //to be sure to stay in integers range
+  SASpitch = constrain(potiRoll, -32768, 32767);
   
   if(abs(SASroll) - DeadbandRoll < 0)
     SASroll = 0;
@@ -124,7 +130,9 @@ int getSASroll() {
 
 int getRCSx() {
   
-  int16_t RCSx = map(analogRead(potiX), 0, 1023, -32700, 32700);
+  int16_t RCSx = map(analogRead(potiX), 0, 1023, -32768, 32767);
+  //to be sure to stay in integers range
+  SASpitch = constrain(potiX, -32768, 32767);
   
   if(abs(RCSx) - DeadbandX < 0)
     RCSx = 0;
@@ -141,7 +149,9 @@ int getRCSx() {
 
 int getRCSy() {
   
-  int16_t RCSy = map(analogRead(potiY), 0, 1023, -32700, 32700);;
+  int16_t RCSy = map(analogRead(potiY), 0, 1023, -32768, 32767);
+  //to be sure to stay in integers range
+  SASpitch = constrain(potiY, -32768, 32767);
   
   if(abs(RCSy) - DeadbandY < 0)
     RCSy = 0;
@@ -155,7 +165,9 @@ int getRCSy() {
 
 int getRCSz() {
   
-  int16_t RCSz = map(analogRead(potiZ), 0, 1023, -32700, 32700);
+  int16_t RCSz = map(analogRead(potiZ), 0, 1023, -32768, 32767);
+  //to be sure to stay in integers range
+  SASpitch = constrain(potiZ, -32768, 32767);
   
   if(abs(RCSz) - DeadbandZ < 0)
     RCSz = 0;
