@@ -58,7 +58,21 @@
  */
 
 //All the commands there are
-enum command {NIX, acg1, acg2, acg3, acg4, acg5, acg6, acg7, acg8, acg9, acg10, acgStage, acgAbort, acgLight, acgGear, acgBrakes, acgRCS, acgSAS, sasStability, sasManeuver, sasPrograde, sasRetrograde, sasNormal, sasAntinormal, sasRadialin, sasRadialout, sasTarget, sasAntitarget, setThrottle, waitTenthSeconds, waitForDistanceCM, waitForRAltM, waitForAltM, waitForAltKM, theExitNode};
+enum command {NIX,
+              acg1, acg2, acg3, acg4, acg5, acg6, acg7, acg8, acg9, acg10,
+              acgStage,
+              acgAbort,
+              acgLight, acgGear, acgBrakes,
+              acgRCS, acgSAS,
+              sasStability, sasManeuver,
+              sasPrograde, sasRetrograde,
+              sasNormal, sasAntinormal,
+              sasRadialin, sasRadialout,
+              sasTarget, sasAntitarget,
+              setThrottle,
+              waitTenthSeconds,
+              waitForDistanceCM, waitForRAltM, waitForAltM, waitForAltKM,
+              theExitNode};
 
 class AutoRocketNode {
   
