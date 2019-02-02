@@ -48,9 +48,11 @@ void loop() {
     // Getting the right commd in the matrix
     command tmp = TouchScreenField[getStoreyX()][getStoreyY()];
 
+    //There's this throttle slide...
     if (tmp == setThrottle) {
       sendCommand(tmp, map(getPreciseX(), 200, 600, 0, 100));
     }
+    //...else it's just buttons
     else {
       // 1 is to toggle
       sendCommand(tmp, 1);
