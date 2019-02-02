@@ -6,7 +6,7 @@
  */
 
 //If 0: The connection to Simpit will be established -> Jibberish on serial monitor
-//If 1: To debug joystick, touchscreen coordinates and the field
+//If 1: To debug joystick, touchscreen coordinates and the command matrix
 #define DEBUG 0
 
 //Including my own libraries
