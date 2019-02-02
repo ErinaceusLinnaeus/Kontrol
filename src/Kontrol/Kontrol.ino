@@ -55,6 +55,8 @@ void loop() {
     command tmp = TouchScreenField[touchy.getStoreyX()][touchy.getStoreyY()];
 
     //There's this throttle slide...
+    //The field 100->200 gives negative numbers
+    //The field 600->700 gives numbers larger 100
     if (tmp == setThrottle) {
       sendCommand(tmp, map(touchy.getPreciseX(), 200, 600, 0, 100));
     }
