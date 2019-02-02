@@ -22,6 +22,9 @@
 //Acronym for AutoRocketList; isn't it cute?
 AutoRocketList auroli;
 
+//Create a touchpanel object
+TouchPanel touchy;
+
 //This is needed by an array to determine what command to send when touching a specific field
 command TouchScreenField[9][11] = {NIX};
 //The actual function is at the bottom, because it's really ugly
@@ -46,11 +49,11 @@ void loop() {
     sendRotation(getSASpitch(), getSASyaw(), getSASroll());
     sendTranslation(getRCSx(), getRCSy(), getRCSz());
     // Getting the right commd in the matrix
-    command tmp = TouchScreenField[getStoreyX()][getStoreyY()];
+    command tmp = TouchScreenField[touchy.getStoreyX()][touchy.getStoreyY()];
 
     //There's this throttle slide...
     if (tmp == setThrottle) {
-      sendCommand(tmp, map(getPreciseX(), 200, 600, 0, 100));
+      sendCommand(tmp, map(touchy.getPreciseX(), 200, 600, 0, 100));
     }
     //...else it's just buttons
     else {
@@ -60,16 +63,16 @@ void loop() {
   }
   else if (DEBUG == 1) {
     checkJoysticks();
-    checkTouch();
+    touchy.check();
   }
   else if (DEBUG == 2) {
 // Getting the right commd in the matrix
-    command tmp = TouchScreenField[getStoreyX()][getStoreyY()];
+    command tmp = TouchScreenField[touchy.getStoreyX()][touchy.getStoreyY()];
 
     Serial.print(checkCommand(tmp, 1));
     Serial.print(" : ");
     if (tmp == setThrottle) {
-      Serial.println(map(getPreciseX(), 200, 600, 0, 100));
+      Serial.println(map(touchy.getPreciseX(), 200, 600, 0, 100));
     }
     else {
       // 1 is to toggle
