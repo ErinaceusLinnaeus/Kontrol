@@ -1,9 +1,9 @@
 /* (C)2019 Benjamin Schmid  
  *  
- *  touch.cpp
+ *  touchpanel.cpp
  */
 
-#include "touch.h"
+#include "touchpanel.h"
 
 void TouchPanel::check() {
 

@@ -14,8 +14,7 @@
 #include "axis.h"
 #include "communication.h"
 #include "display.h"
-//#include "joysticks.h"
-#include "touch.h"
+#include "touchpanel.h"
 
 //Create the AutoRocketList. Only one will ever be used.
 //Loading or starting a new one will unload the current Script.
@@ -47,8 +46,6 @@ void setup() {
   Serial.begin(115200);
   fillcommandMatrix();
   
-//  initializeJoystickPins();
-
   if (DEBUG == 0)
     initializeSimpit();
 }
@@ -59,9 +56,6 @@ void loop() {
     updateSimpit();
     sendRotation(pitch.getValue(), yaw.getValue(), roll.getValue());
     sendTranslation(x.getValue(), y.getValue(), z.getValue());
-    
-//    sendRotation(getSASpitch(), getSASyaw(), getSASroll());
-//    sendTranslation(getRCSx(), getRCSy(), getRCSz());
 
     // Getting the right commd in the matrix
     command tmp = commandMatrix[touchy.getStoreyX()][touchy.getStoreyY()];
@@ -85,20 +79,16 @@ void loop() {
     x.check();
     y.check();
     z.check();
-    
-//    checkJoysticks();
 
     touchy.check();
     checkcommandMatrix();
     
     delay(200);
   }
-    
-
-
 }
 
 void checkcommandMatrix() {
+  
   // Getting the right commd in the matrix
   command tmp = commandMatrix[touchy.getStoreyX()][touchy.getStoreyY()];
 

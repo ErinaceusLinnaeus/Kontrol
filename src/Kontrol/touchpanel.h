@@ -1,11 +1,11 @@
 /*  (C)2019 Benjamin Schmid
  *   
- *  touch.h
+ *  touchpanel.h
  *  Simplifying touch screen coordinates
  */
  
-#ifndef TOUCH_H
-#define TOUCH_H
+#ifndef TOUCHPANEL_H
+#define TOUCHPANEL_H
 
 #include <arduino.h>
 #include <TouchScreen.h>
