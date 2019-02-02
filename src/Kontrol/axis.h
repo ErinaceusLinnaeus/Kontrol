@@ -13,31 +13,31 @@ class Axis {
 
   private:
     char name[6];
-    int potiPin;
-    int buttonUnprecise;
-    int deadband;
-    int precision;
-    int mirror;
+    int16_t potiPin;
+    int16_t buttonUnprecise;
+    int16_t deadband;
+    int16_t precision;
+    int16_t mirror;
     
     //Getting Data
     char* getName();
-    int getPotiPin();
-    int getButtonUnprecise();
-    int getDeadband();
-    int getPrecision();
-    int getMirror();
+    int16_t getPotiPin();
+    int16_t getButtonUnprecise();
+    int16_t getDeadband();
+    int16_t getPrecision();
+    int16_t getMirror();
     
   public:
     //Constructor
-    Axis(char name[6], int potiPin, int buttonUnprecise, int deadband, int precision, int mirror);
+    Axis(char name[6], int16_t potiPin, int16_t buttonUnprecise, int16_t deadband, int16_t precision, int16_t mirror);
 
     //Debugging
     void check();
 
     //Getting Readings from hardware
-    int getValue();
-    int getReading();
-    int getUnprecise();
+    int16_t getValue();
+    int16_t getReading();
+    int16_t getUnprecise();
 };
 
 #endif

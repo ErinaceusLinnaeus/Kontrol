@@ -14,7 +14,7 @@
 #include "axis.h"
 #include "communication.h"
 #include "display.h"
-#include "joysticks.h"
+//#include "joysticks.h"
 #include "touch.h"
 
 //Create the AutoRocketList. Only one will ever be used.
@@ -105,7 +105,7 @@ void checkcommandMatrix() {
   Serial.print(checkCommand(tmp, 1));
   if (tmp == setThrottle) {
     Serial.print(" : ");
-    Serial.print(map(touchy.getPreciseX(), 200, 600, 0, 100));
+    Serial.print(constrain(map(touchy.getPreciseX(), 200, 600, 0, 100), 0, 100));
   }
   Serial.println();
 }

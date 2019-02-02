@@ -10,32 +10,32 @@ char* Axis::getName() {
   return this->name;
 }
 
-int Axis::getPotiPin() {
+int16_t Axis::getPotiPin() {
 
   return this->potiPin;
 }
 
-int Axis::getButtonUnprecise() {
+int16_t Axis::getButtonUnprecise() {
 
   return this->buttonUnprecise;
 }
 
-int Axis::getDeadband() {
+int16_t Axis::getDeadband() {
 
   return this->deadband;
 }
 
-int Axis::getPrecision() {
+int16_t Axis::getPrecision() {
 
   return this->precision;
 }
 
-int Axis::getMirror() {
+int16_t Axis::getMirror() {
 
   return this->mirror;
 }
 
-Axis::Axis(char name[6], int potiPin, int buttonUnprecise, int deadband, int precision, int mirror) {
+Axis::Axis(char name[6], int16_t potiPin, int16_t buttonUnprecise, int16_t deadband, int16_t precision, int16_t mirror) {
 
   pinMode(buttonUnprecise, INPUT_PULLUP);
   pinMode(potiPin, INPUT);
@@ -54,33 +54,32 @@ void Axis::check() {
   Serial.print(" : ");
   Serial.print(this->getReading());
   Serial.print(" -> ");
-  Serial.print(this->getValue());
+  Serial.println(this->getValue());
 }
 
-int Axis::getValue() {
+int16_t Axis::getValue() {
 
-  int reading = map(this->getReading(), 0, 1023, -32768, 32767);
-  //to be sure to stay in integers range
-  reading = constrain(reading, -32768, 32767);
+  //Because we map to a larger range than 16bit integer -> 1% deadband on the edges after constraining to 16bit integer
+  int32_t reading = constrain(map(this->getReading(), 0, 1023, -33000, 33000), -32767, 32767);
   
   if(abs(reading) - this->getDeadband() < 0)
     reading = 0;
 
   //some axis are the wrong way
-  reading = reading * getMirror();
-    
-  if (!this->getUnprecise())
-    return reading / this->getPrecision();
+  reading = reading * this->getMirror();
+
+  if (!(this->getUnprecise()))
+    return (int16_t)(reading / this->getPrecision());
   else
-    return reading;
+    return (int16_t)reading;
 }
 
-int Axis::getReading() {
+int16_t Axis::getReading() {
 
   return analogRead(this->getPotiPin());
 }
 
-int Axis::getUnprecise() {
+int16_t Axis::getUnprecise() {
 
-  return digitalRead(this->getUnprecise());
+  return digitalRead(this->getButtonUnprecise());
 }
