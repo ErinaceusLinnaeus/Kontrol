@@ -8,7 +8,7 @@
 #define COMMUNICATION_H
 
 #include <stdint.h>
-#include "AutoRocket.h"
+#include "autorocketlist.h"
 
 void initializeSimpit();
 

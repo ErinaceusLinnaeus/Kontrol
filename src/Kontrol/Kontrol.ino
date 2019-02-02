@@ -11,7 +11,7 @@
 #define DEBUG 0
 
 //Including my own libraries
-#include "AutoRocket.h"
+#include "autorocketlist.h"
 #include "communication.h"
 #include "display.h"
 #include "joysticks.h"

@@ -4,7 +4,7 @@
  */
 
 #include "Arduino.h"
-#include "AutoRocket.h"
+#include "autorocketlist.h"
 #include "communication.h"
 
 void AutoRocketList::launchList() {
