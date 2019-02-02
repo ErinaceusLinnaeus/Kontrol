@@ -226,17 +226,12 @@ void sendCommand(uint32_t command, uint32_t value) {
 
 void sendThrottle(int16_t throttle) {
 
-  //Negative does work but let's be solid, because...
-  if (throttle < 0) {
-    throttle = 0;
-  }
-  //...above 100 leads to 0 throttle and maybe someday negative throttle will be wonky
-  else if (throttle > 100) {
-    throttle = 100;
-  }
-  
   //I use %, but KSP expects 0 -> 32767
   throttle = throttle * 327,67;
+  
+  //to be sure to stay in integers range
+  throttle = constrain(throttle, 0, 32767);
+  
   mySimpit.send(THROTTLE_MESSAGE, (unsigned char*) &throttle, 2);
 }
 
