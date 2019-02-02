@@ -13,7 +13,7 @@
 //Including my own libraries
 #include "AutoRocket.h"
 #include "communication.h"
-#include "DisplayOperations.h"
+#include "display.h"
 #include "joysticks.h"
 #include "touch.h"
 
@@ -24,6 +24,9 @@ AutoRocketList auroli;
 
 //Create a touchpanel object
 TouchPanel touchy;
+
+//Create a display object
+Display hdmi;
 
 //This is needed by an array to determine what command to send when touching a specific field
 command TouchScreenField[9][11] = {NIX};
@@ -36,7 +39,7 @@ void setup() {
   fillTouchScreenField();
   
   initializeJoystickPins();
-//  initializeDisplay();
+//  hdmi.initialize();
 
   if (DEBUG == 0)
     initializeSimpit();
