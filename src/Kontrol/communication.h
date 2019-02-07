@@ -8,6 +8,7 @@
 #define COMMUNICATION_H
 
 #include "autorocketlist.h"
+#include <Keyboard.h>
 
 void initializeSimpit();
 

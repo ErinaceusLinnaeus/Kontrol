@@ -221,6 +221,24 @@ void sendCommand(uint32_t command, uint32_t value) {
       unsetAbortFlag();
       sendThrottle(value);
     }
+    else if (command == keyMap) {
+      unsetAbortFlag();
+      Keyboard.begin();
+      Keyboard.print('m'); 
+      Keyboard.end();
+    }
+    else if (command == keyWarpInc) {
+      unsetAbortFlag();
+      Keyboard.begin();
+      Keyboard.print('.'); 
+      Keyboard.end();
+    }
+    else if (command == keyWarpDec) {
+      unsetAbortFlag();
+      Keyboard.begin();
+      Keyboard.print(','); 
+      Keyboard.end();
+    }
   }
 }
 
@@ -377,6 +395,18 @@ char* checkCommand(uint32_t command, uint32_t value) {
     else if (command == setThrottle) {
       unsetAbortFlag();
       return "throttle";
+    }
+    else if (command == keyMap) {
+      unsetAbortFlag();
+      return ("keyMap: m");      
+    }
+    else if (command == keyWarpInc) {
+      unsetAbortFlag();
+      return ("keyWarpInc: ."); 
+    }
+    else if (command == keyWarpDec) {
+      unsetAbortFlag();
+      return ("keyWarpDec: ,"); 
     }
   }
   else {

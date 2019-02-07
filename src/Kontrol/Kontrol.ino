@@ -7,7 +7,7 @@
 
 //If 0: The connection to Simpit will be established -> Jibberish on serial monitor
 //If 1: To debug joystick, touchscreen coordinates and the command matrix
-#define DEBUG 0
+#define DEBUG 1
 
 //Including my own libraries
 #include "autorocketlist.h"
@@ -44,6 +44,7 @@ void checkcommandMatrix();
 void setup() {
 
   Serial.begin(115200);
+  
   fillcommandMatrix();
   
   if (DEBUG == 0)
@@ -116,7 +117,7 @@ void fillcommandMatrix() {
   commandMatrix[1][9] = acgBrakes;
   commandMatrix[1][10] = acgAbort;
   
-  commandMatrix[2][1] = NIX;
+  commandMatrix[2][1] = keyWarpDec;
   commandMatrix[2][2] = setThrottle;
   commandMatrix[2][3] = NIX;
   commandMatrix[2][4] = NIX;
@@ -127,7 +128,7 @@ void fillcommandMatrix() {
   commandMatrix[2][9] = acgLight;
   commandMatrix[2][10] = acgGear;
   
-  commandMatrix[3][1] = NIX;
+  commandMatrix[3][1] = keyWarpInc;
   commandMatrix[3][2] = setThrottle;
   commandMatrix[3][3] = NIX;
   commandMatrix[3][4] = NIX;
@@ -171,7 +172,7 @@ void fillcommandMatrix() {
   commandMatrix[6][9] = sasPrograde;
   commandMatrix[6][10] = sasRetrograde;
   
-  commandMatrix[7][1] = NIX;
+  commandMatrix[7][1] = keyMap;
   commandMatrix[7][2] = setThrottle;
   commandMatrix[7][3] = NIX;
   commandMatrix[7][4] = NIX;
