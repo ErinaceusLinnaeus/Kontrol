@@ -72,7 +72,7 @@ enum command {NIX,
               setThrottle,
               waitTenthSeconds,
               waitForDistanceCM, waitForRAltM, waitForAltM, waitForAltKM,
-              keyMap, keyWarpInc, keyWarpDec,
+              keyMap, keyWarpInc, keyWarpDec, keyCam,
               theExitNode};
 
 class AutoRocketNode {

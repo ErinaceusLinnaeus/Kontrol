@@ -161,7 +161,7 @@ void fillcommandMatrix() {
   commandMatrix[5][9] = sasNormal;
   commandMatrix[5][10] = sasAntinormal;
  
-  commandMatrix[6][1] = NIX;
+  commandMatrix[6][1] = keyCam;
   commandMatrix[6][2] = setThrottle;
   commandMatrix[6][3] = NIX;
   commandMatrix[6][4] = NIX;

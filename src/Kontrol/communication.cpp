@@ -239,6 +239,12 @@ void sendCommand(uint32_t command, uint32_t value) {
       Keyboard.print(','); 
       Keyboard.end();
     }
+    else if (command == keyCam) {
+      unsetAbortFlag();
+      Keyboard.begin();
+      Keyboard.print('k'); 
+      Keyboard.end();
+    }
   }
 }
 
@@ -407,6 +413,10 @@ char* checkCommand(uint32_t command, uint32_t value) {
     else if (command == keyWarpDec) {
       unsetAbortFlag();
       return ("keyWarpDec: ,"); 
+    }
+    else if (command == keyCam) {
+      unsetAbortFlag();
+      return ("keyCam: k"); 
     }
   }
   else {
