@@ -17,6 +17,8 @@ class Axis {
     int16_t buttonUnprecise;
     int16_t deadband;
     int16_t precision;
+    int16_t precisionModifier;
+    int16_t precisionTimer;
     int16_t mirror;
     
     //Getting Data
