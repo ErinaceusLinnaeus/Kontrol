@@ -84,7 +84,8 @@ int16_t Axis::getValue() {
   else {
     float tmp = ((millis() - precisionTimer) / 500);
 
-    if ((reading * tmp) < (reading / this->getPrecision()))
+    //Check if time based precision modifier is more precise than the maximum precision allowed
+    if (abs(reading * tmp) < abs(reading / this->getPrecision()))
       return (int16_t)(reading / this->getPrecision());
     else
       return (int16_t)(reading * tmp);
