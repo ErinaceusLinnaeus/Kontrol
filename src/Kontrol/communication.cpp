@@ -138,80 +138,80 @@ void sendCommand(uint32_t command, uint32_t value) {
       mySimpit.activateAction(SAS_ACTION);
       delay(50);
       AutopilotMode mySASMode = AP_STABILITYASSIST;
-      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
-//      mySimpit.setSASMode(AP_STABILITYASSIST);
+//      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
+      mySimpit.setSASMode(AP_STABILITYASSIST);
     }
     else if (command == sasManeuver) {
       unsetAbortFlag();
       mySimpit.activateAction(SAS_ACTION);
       delay(50);
       AutopilotMode mySASMode = AP_MANEUVER;
-      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
-//      mySimpit.setSASMode(AP_MANEUVER);
+//      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
+      mySimpit.setSASMode(AP_MANEUVER);
     }
     else if (command == sasPrograde) {
       unsetAbortFlag();
       mySimpit.activateAction(SAS_ACTION);
       delay(50);
       AutopilotMode mySASMode = AP_PROGRADE;
-      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
-//      mySimpit.setSASMode(AP_PROGRADE);
+//      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
+      mySimpit.setSASMode(AP_PROGRADE);
     }
     else if (command == sasRetrograde) {
       unsetAbortFlag();
       mySimpit.activateAction(SAS_ACTION);
       delay(50);
       AutopilotMode mySASMode = AP_RETROGRADE;
-      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
-//      mySimpit.setSASMode(AP_RETROGRADE);
+//      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
+      mySimpit.setSASMode(AP_RETROGRADE);
     }
     else if (command == sasNormal) {
       unsetAbortFlag();
       mySimpit.activateAction(SAS_ACTION);
       delay(50);
       AutopilotMode mySASMode = AP_NORMAL;
-      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
-//      mySimpit.setSASMode(AP_NORMAL);
+//      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
+      mySimpit.setSASMode(AP_NORMAL);
     }
     else if (command == sasAntinormal) {
       unsetAbortFlag();
       mySimpit.activateAction(SAS_ACTION);
       delay(50);
       AutopilotMode mySASMode = AP_ANTINORMAL;
-      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
-//      mySimpit.setSASMode(AP_ANTINORMAL);
+//      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
+      mySimpit.setSASMode(AP_ANTINORMAL);
     }
     else if (command == sasRadialin) {
       unsetAbortFlag();
       mySimpit.activateAction(SAS_ACTION);
       delay(50);
       AutopilotMode mySASMode = AP_RADIALIN;
-      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
-//      mySimpit.setSASMode(AP_RADIALIN);
+//      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
+      mySimpit.setSASMode(AP_RADIALIN);
     }
     else if (command == sasRadialout) {
       unsetAbortFlag();
       mySimpit.activateAction(SAS_ACTION);
       delay(50);
       AutopilotMode mySASMode = AP_RADIALOUT;
-      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
-//      mySimpit.setSASMode(AP_RADIALOUT);
+//      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
+      mySimpit.setSASMode(AP_RADIALOUT);
     }
     else if (command == sasTarget) {
       unsetAbortFlag();
       mySimpit.activateAction(SAS_ACTION);
       delay(50);
       AutopilotMode mySASMode = AP_TARGET;
-      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
-//      mySimpit.setSASMode(AP_TARGET);
+//      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
+      mySimpit.setSASMode(AP_TARGET);
     }
     else if (command == sasAntitarget) {
       unsetAbortFlag();
       mySimpit.activateAction(SAS_ACTION);
       delay(50);
       AutopilotMode mySASMode = AP_ANTITARGET;
-      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
-//      mySimpit.setSASMode(AP_ANTITARGET);
+//      mySimpit.send(28, (unsigned char*) &mySASMode, 1);
+      mySimpit.setSASMode(AP_ANTITARGET);
     }
     //Temporary bugfix. Plugin seems to listen to the wrong "channel".
   //  AutopilotMode mySASMode;
@@ -250,13 +250,15 @@ void sendCommand(uint32_t command, uint32_t value) {
 
 void sendThrottle(int16_t throttle) {
 
-  //to be sure to stay in integers range later
-  throttle = constrain(throttle, 0, 100);
+  //Create the object
+  throttleMessage myThrottle;
+
+  //Feed it the value for throttle (first in %, then stretched to the range 0 -> 32767)
+  myThrottle.throttle = (constrain(throttle, 0, 100) * 327,67);
+
+  //Send it
+  mySimpit.send(THROTTLE_MESSAGE, myThrottle);
   
-  //I use %, but KSP expects 0 -> 32767
-  throttle = throttle * 327,67;
-  
-  mySimpit.send(THROTTLE_MESSAGE, (unsigned char*) &throttle, 2);
 }
 
 void sendRotation(int16_t pitch, int16_t yaw, int16_t roll) {
